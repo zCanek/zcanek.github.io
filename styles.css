@@ -1,0 +1,53 @@
+.top-bar
+{
+	background-color: #030f0f;
+	color: #ece2c6;
+	padding: 5px;
+	height: 50px;
+	position: fixed;
+	width: 100%;
+	top: 0;
+	z-index: 1000;
+
+}
+
+.top-bar .title
+{
+	font-family: "Manufacturing Consent", system-ui;
+        font-size: 48px;
+        text-align: center;
+}
+
+.top-bar img
+{
+	float: right;
+	padding-right: 10px;
+}
+
+body
+{
+	background-color: #041717;
+	margin: 0;
+}
+
+.h1
+{
+	color: #ece2c6;
+	font-family: "Manufacturing Consent", system-ui;
+	font-size: 40px;
+	margin: 35px;
+	padding-top: 50px;
+}
+
+.h3
+{
+        color: #f1e9d5;
+}
+
+.text
+{
+	font-family: "Orbitron", sans-serif;
+	font-style: normal;
+	color: #ece2c6;
+	margin: 35px;
+}
