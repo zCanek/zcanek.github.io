@@ -2,26 +2,24 @@
 {
 	background-color: #030f0f;
 	color: #ece2c6;
-	padding: 5px;
-	height: 50px;
-	position: fixed;
 	width: 100%;
-	top: 0;
-	z-index: 1000;
-
 }
 
 .top-bar .title
 {
 	font-family: "Manufacturing Consent", system-ui;
-        font-size: 48px;
+        font-size: 68px;
         text-align: center;
 }
 
-.top-bar img
+.eye
 {
-	float: right;
-	padding-right: 10px;
+	top: 0;
+	right: 0;
+	padding-right: 7px;
+	padding-top: 7px;
+	position: fixed;
+	width: 70;
 }
 
 body
@@ -34,9 +32,8 @@ body
 {
 	color: #ece2c6;
 	font-family: "Manufacturing Consent", system-ui;
-	font-size: 40px;
+	font-size: 50px;
 	margin: 35px;
-	padding-top: 50px;
 }
 
 .h3
@@ -49,5 +46,6 @@ body
 	font-family: "Orbitron", sans-serif;
 	font-style: normal;
 	color: #ece2c6;
-	margin: 35px;
+	margin-right: 69px;
+	margin-left: 35px;
 }
