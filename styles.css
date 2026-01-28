@@ -1,0 +1,84 @@
+.top-bar
+{
+	background-color: #030f0f;
+	color: #ece2c6;
+	width: 100%;
+}
+
+.top-bar .title
+{
+	font-family: "Manufacturing Consent", system-ui;
+    font-size: 68px;
+    text-align: center;
+}
+
+.eye
+{
+	top: 0;
+	right: 0;
+	padding-right: 7px;
+	padding-top: 7px;
+	position: fixed;
+	width: 70;
+	z-index: 1;
+}
+
+body
+{
+	background-color: #041717;
+	margin: 0;
+}
+
+.h1
+{
+	color: #ece2c6;
+	font-weight: normal;
+	font-family: "UnifrakturMaguntia", sans-serif;
+	font-size: 50px;
+	margin: 35px;
+}
+
+.h3
+{
+        color: #f1e9d5;
+}
+
+.text
+{
+	font-family: sans-serif;
+	font-style: normal;
+	color: #ece2c6;
+	margin-right: 69px;
+	margin-left: 35px;
+}
+
+.scroll-marquee {
+ height: 21px;	
+ overflow: hidden;
+ position: relative;
+ background: #ece2c6;
+ color: #041717;
+ border: 1px solid #030f0f;
+}
+.scroll-marquee p {
+ position: absolute;
+ width: 100%;
+ height: 100%;
+ margin: 0;
+ line-height: 21px;
+ text-align: center;
+ /* Starting position */
+ transform:translateX(100%);
+ /* Apply animation to this element */
+ animation: scroll-marquee 5s linear -10s infinite;
+ animation-fill-mode: both;
+}
+/* Move it (define the animation) */
+@keyframes scroll-marquee {
+ 0%   {
+ transform: translateX(100%);
+ }
+ 100% {
+ transform: translateX(-100%); 
+ }
+}
