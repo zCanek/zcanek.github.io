@@ -1,8 +1,20 @@
-  <div class="top-bar">
-    <div class="title"> Canek's Blog </div>
-    <div class="eye"><img src="./images/glitchEye.gif" width="69"></div>
-  </div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const bar = document.createElement("div");
+  bar.className = "top-bar";
+  bar.innerHTML = "Mi barra superior";
 
-  <div class="scroll-marquee ">
-    <p>Put the cursor over a underlined concept and press ctrl to view a preview of the note!</p>
-  </div>
+  document.body.prepend(bar);
+});
+</script>
+
+<style>
+.top-bar {
+  position: sticky;
+  top: 0;
+  background: #222;
+  color: white;
+  padding: 0.5em 1em;
+  z-index: 9999;
+}
+</style>
