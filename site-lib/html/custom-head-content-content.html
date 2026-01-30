@@ -11,10 +11,10 @@
         const target = document.getElementById('center-content');
         if (target) {
             // Inserta después del target (compatible con navegadores modernos)
-            if (typeof target.after === 'function') {
-                target.after(bar);
+            if (typeof target.prepend === 'function') {
+                target.prepend(bar);
             } else {
-                target.parentNode.insertBefore(bar, target.nextSibling);
+                target.parentNode.insertBefore(bar, target.firstChild);
             }
             console.info('✅ Barra insertada');
         } else {
