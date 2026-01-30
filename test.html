@@ -30,23 +30,6 @@
         insertBar();
     }
 
-    // 2️⃣  Si el elemento pudiera aparecer después, observamos cambios
-    const observer = new MutationObserver((mutations, obs) => {
-        if (document.getElementById('center-content')) {
-            insertBar();          // ahora sí existe → lo insertamos
-            obs.disconnect();    // dejamos de observar
-        }
-    });
-    observer.observe(document.body, { childList: true, subtree: true });
-
-    // 3️⃣  Como respaldo rápido, también podemos hacer polling (opcional)
-    const poller = setInterval(() => {
-        if (document.getElementById('center-content')) {
-            insertBar();
-            clearInterval(poller);
-        }
-    }, 200);
-    setTimeout(() => clearInterval(poller), 8000); // dejar de intentar después de 8 s
 </script>
 
 <style>
