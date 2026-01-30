@@ -3,21 +3,50 @@
     rel="stylesheet">
 
 <script>
-    document.addEventListener('DOMContentLoaded', () => {
+    function insertBar() {
         const bar = document.createElement('div');
         bar.className = 'top-bar';
         bar.textContent = "Canek's Blog";
 
         const target = document.getElementById('center-content');
-
         if (target) {
-            target.after(bar)
-            console.warn('TARGET = TRUE');   // equivalente a insertAdjacentElement('afterend')
+            // Inserta después del target (compatible con navegadores modernos)
+            if (typeof target.after === 'function') {
+                target.after(bar);
+            } else {
+                target.parentNode.insertBefore(bar, target.nextSibling);
+            }
+            console.info('✅ Barra insertada');
         } else {
-            console.warn('⚠️ #center-content no encontrado → inserto al inicio del body.');
+            console.warn('⚠️ #center-content no encontrado → barra al inicio del body');
             document.body.prepend(bar);
         }
+    }
+
+    // 1️⃣  Intentamos inmediatamente cuando el DOM está listo
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => insertBar());
+    } else {
+        insertBar();
+    }
+
+    // 2️⃣  Si el elemento pudiera aparecer después, observamos cambios
+    const observer = new MutationObserver((mutations, obs) => {
+        if (document.getElementById('center-content')) {
+            insertBar();          // ahora sí existe → lo insertamos
+            obs.disconnect();    // dejamos de observar
+        }
     });
+    observer.observe(document.body, { childList: true, subtree: true });
+
+    // 3️⃣  Como respaldo rápido, también podemos hacer polling (opcional)
+    const poller = setInterval(() => {
+        if (document.getElementById('center-content')) {
+            insertBar();
+            clearInterval(poller);
+        }
+    }, 200);
+    setTimeout(() => clearInterval(poller), 8000); // dejar de intentar después de 8 s
 </script>
 
 <style>
