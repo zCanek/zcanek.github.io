@@ -1,4 +1,6 @@
-<link href="https://fonts.googleapis.com/css2?family=Manufacturing+Consent&amp;family=UnifrakturMaguntia&amp;display=swap" rel="stylesheet">
+<link
+    href="https://fonts.googleapis.com/css2?family=Manufacturing+Consent&amp;family=UnifrakturMaguntia&amp;display=swap"
+    rel="stylesheet">
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
@@ -8,27 +10,31 @@
 
         const target = document.getElementById('center-content');
 
-        target.insertAdjacentElement('afterend', bar);
+        if (target) {
+            target.after(bar);   // equivalente a insertAdjacentElement('afterend')
+        } else {
+            console.warn('⚠️ #center-content no encontrado → inserto al inicio del body.');
+            document.body.prepend(bar);
+        }
     });
 </script>
 
 <style>
+    .top-bar {
+        font-size: 62px;
+        width: 100%;
+        width: -webkit-fill-available !important;
+        height: 60px !important;
+        background: #ece2c6 !important;
+        color: #041717 !important;
+        font-family: "Manufacturing Consent", sans-serif !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
 
-.top-bar {
-  font-size: 62px;
-  width: 100%;
-  width: -webkit-fill-available !important;
-  height: 60px !important;
-  background: #ece2c6 !important;
-  color: #041717 !important;
-  font-family: "Manufacturing Consent", sans-serif !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-}
-
-.sidebar-handle {
-    border-right: 1px solid #ece2c6;
-    border-left: 1px solid #ece2c6;
-}
+    .sidebar-handle {
+        border-right: 1px solid #ece2c6;
+        border-left: 1px solid #ece2c6;
+    }
 </style>
