@@ -34,10 +34,11 @@
 <li data-line="9" dir="auto"><span class="list-bullet"></span>
 <p>Sometimes when frameworks are used to build a website, a favicon that is part of the installation gets leftover, and if the website developer doesn't replace this with a custom one, this can give us a clue on what framework is in use. OWASP host a database of common framework icons that you can use to check against the targets favicon&nbsp;[<a rel="noopener nofollow" class="external-link is-unresolved" href="https://wiki.owasp.org/index.php/OWASP_favicon_database" target="_self">https://wiki.owasp.org/index.php/OWASP_favicon_database</a>. Once we know the framework stack, we can use external resources to discover more about it.</p>
 </li>
-<li data-line="10" dir="auto" class="code-styler-pre-parent"><span class="list-bullet"></span>
+<li data-line="10" dir="auto"><span class="list-bullet"></span>
 <p>Viewing the page source you can find the link to the favicon file.<br>
 If you run the following command, it will download the favicon and get its md5 hash value which you can then lookup on the OWASP database</p>
-<pre class="code-styler-pre" defaultfold="false"><div class="code-styler-header-container-hidden"></div><code data-line="13"><div class="code-styler-line"><div class="code-styler-line-number">1</div><div class="code-styler-line-text">curl &lt;URL_TO_THE_FAVICON&gt; | md5sum</div></div></code><button class="copy-code-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-copy"><rect x="8" y="8" width="14" height="14" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg></button></pre>
+<pre><code data-line="13">curl &lt;URL_TO_THE_FAVICON&gt; | md5sum
+</code><button class="copy-code-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-copy"><rect x="8" y="8" width="14" height="14" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg></button></pre>
 </li>
 </ul>
 </li>
@@ -53,8 +54,9 @@ If you run the following command, it will download the favicon and get its md5 h
 <li data-line="19" dir="auto"><span class="list-bullet"></span>When we make requests to the web server, the server returns various HTTP headers. These headers can sometimes contain useful information such as the webserver software and possibly the programming/scripting language in use.</li>
 <li data-line="20" dir="auto"><span class="list-bullet"></span>Using this information, we could find vulnerable versions of software being used.</li>
 <li data-line="21" dir="auto"><span class="list-bullet"></span><code>-v</code> switch enables verbose mode, which will output the headers</li>
-<li data-line="22" dir="auto" class="code-styler-pre-parent"><span class="list-bullet"></span>
-<pre class="code-styler-pre" defaultfold="false"><div class="code-styler-header-container-hidden"></div><code data-line="22"><div class="code-styler-line"><div class="code-styler-line-number">1</div><div class="code-styler-line-text">curl http://10.10.155.167 -v</div></div></code><button class="copy-code-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-copy"><rect x="8" y="8" width="14" height="14" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg></button></pre>
+<li data-line="22" dir="auto"><span class="list-bullet"></span>
+<pre><code data-line="22">curl http://10.10.155.167 -v
+</code><button class="copy-code-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-copy"><rect x="8" y="8" width="14" height="14" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg></button></pre>
 </li>
 </ul>
 </li>
