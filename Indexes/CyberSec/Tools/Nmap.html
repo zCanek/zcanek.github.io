@@ -1,0 +1,658 @@
+<!DOCTYPE html> <html lang="en"><head>
+<title>Nmap</title>
+<base href="../../..">
+<meta name="pathname" content="Indexes/CyberSec/Tools/Nmap.html">
+<meta name="description" content="Anom - Nmap">
+<meta property="og:title" content="Nmap">
+<meta property="og:description" content="Anom - Nmap">
+<meta property="og:type" content="website">
+<meta property="og:url" content="Indexes/CyberSec/Tools/Nmap.html">
+<meta property="og:image" content="assets/image_1746227923137_0.png">
+<meta charset="UTF-8"><meta property="og:site_name" content="Anom"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=1.0, maximum-scale=5.0"><script async="" id="webpage-script" src="site-lib/scripts/webpage.js" onload="this.onload=null;this.setAttribute(&quot;loaded&quot;, &quot;true&quot;)"></script><script async="" id="graph-wasm-script" src="site-lib/scripts/graph-wasm.js" onload="this.onload=null;this.setAttribute(&quot;loaded&quot;, &quot;true&quot;)"></script><script async="" id="graph-render-worker-script" src="site-lib/scripts/graph-render-worker.js" onload="this.onload=null;this.setAttribute(&quot;loaded&quot;, &quot;true&quot;)"></script><link rel="icon" href="site-lib/media/favicon.png"><link rel="preload" href="site-lib/styles/snippets.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="site-lib/styles/snippets.css"></noscript><link rel="stylesheet" href="site-lib/styles/obsidian.css"><link rel="stylesheet" href="site-lib/styles/theme.css"><link rel="preload" href="site-lib/styles/global-variable-styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="site-lib/styles/global-variable-styles.css"></noscript><link rel="preload" href="site-lib/styles/supported-plugins.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="site-lib/styles/supported-plugins.css"></noscript><link rel="preload" href="site-lib/styles/main-styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="site-lib/styles/main-styles.css"></noscript><style>body{--line-width:40em;--line-width-adaptive:40em;--file-line-width:40em;--sidebar-width:min(20em, 80vw);--collapse-arrow-size:11px;--tree-vertical-spacing:1.3em;--sidebar-margin:12px}:root{background-color:#202124}.sidebar{height:100%;font-size:14px;z-index:10;min-width:calc(var(--sidebar-width) + var(--divider-width-hover));max-width:calc(var(--sidebar-width) + var(--divider-width-hover));position:relative;overflow:hidden;overflow:clip;transition:min-width ease-in-out,max-width ease-in-out;transition-duration:.2s;contain:size}#left-sidebar{left:0}#right-sidebar{right:0}.sidebar.is-collapsed{min-width:0;max-width:0}.sidebar.floating{position:absolute}.sidebar .leaf-content{height:100%;min-width:calc(var(--sidebar-width) - var(--divider-width-hover));top:0;padding:var(--sidebar-margin);padding-top:4em;line-height:var(--line-height-tight);background-color:var(--background-secondary);transition:background-color,border-right,border-left,box-shadow;transition-duration:var(--color-fade-speed);transition-timing-function:ease-in-out;position:absolute;display:flex;flex-direction:column}.sidebar:not(.is-collapsed) .leaf-content{min-width:calc(max(100%,var(--sidebar-width)) - 3px);max-width:calc(max(100%,var(--sidebar-width)) - 3px)}#left-sidebar-content{left:0;border-top-right-radius:var(--radius-l);border-bottom-right-radius:var(--radius-l)}#right-sidebar-content{right:0;border-top-left-radius:var(--radius-l);border-bottom-left-radius:var(--radius-l)}.sidebar #left-sidebar-content,.sidebar #right-sidebar-content{contain:none!important;container-type:normal!important;animation:none!important}.sidebar:has(.leaf-content:empty):has(.topbar-content:empty){display:none}.sidebar-topbar{height:calc(2.3em + 2 * var(--sidebar-margin));width:var(--sidebar-width);padding:var(--sidebar-margin);z-index:1;position:fixed;display:flex;align-items:center;transition:width ease-in-out;transition-duration:inherit}.sidebar.is-collapsed .sidebar-topbar{width:calc(2.3em + var(--sidebar-margin) * 2)}.sidebar .sidebar-topbar.is-collapsed{width:0}#left-sidebar .sidebar-topbar{left:0;flex-direction:row;border-top-right-radius:var(--radius-l)}#right-sidebar .sidebar-topbar{right:0;flex-direction:row-reverse;border-top-left-radius:var(--radius-l)}#left-sidebar .topbar-content{margin-right:calc(2.3em + var(--sidebar-margin));flex-direction:row}#right-sidebar .topbar-content{margin-left:calc(2.3em + var(--sidebar-margin));flex-direction:row-reverse}.topbar-content{overflow:hidden visible;overflow:clip visible;width:100%;height:100%;display:flex;align-items:center;transition:inherit}.sidebar.is-collapsed .topbar-content{width:0;transition:inherit}.clickable-icon.sidebar-collapse-icon{background-color:transparent;color:var(--icon-color-focused);padding:2px!important;margin:0!important;height:100%!important;width:2.3em!important;margin-inline:0.14em!important;position:absolute}#left-sidebar .clickable-icon.sidebar-collapse-icon{transform:rotateY(180deg);right:var(--sidebar-margin)}#right-sidebar .clickable-icon.sidebar-collapse-icon{transform:rotateY(180deg);left:var(--sidebar-margin)}.clickable-icon.sidebar-collapse-icon svg.svg-icon{width:100%;height:100%}.feature-title{margin-left:1px;text-transform:uppercase;letter-spacing:.06em;margin-top:.75em;margin-bottom:.75em}.feature-header{display:flex;align-items:center;padding-top:0;font-size:1em;padding-left:0}body.floating-sidebars .sidebar{position:absolute}body{transition:background-color var(--color-fade-speed) ease-in-out}#navbar:not(:empty){display:flex;align-items:center;justify-content:space-between;padding:.5em 1em;width:100%}#main{display:flex;flex-direction:column;height:100%;width:100%;align-items:stretch;justify-content:center}#main-horizontal{display:flex;flex-direction:row;flex-grow:1;width:100%;align-items:stretch;justify-content:center}#center-content{flex-basis:100%;max-width:100%;width:100%;height:100%;display:flex;flex-direction:column;align-items:center;transition:opacity .2s ease-in-out;contain:inline-size}.hide{opacity:0!important;transition:opacity .2s ease-in-out;pointer-events:none}#center-content>.obsidian-document{padding-left:2em;padding-right:1em;margin-bottom:0;width:100%;width:-webkit-fill-available;width:-moz-available;width:fill-available;transition:background-color var(--color-fade-speed) ease-in-out;border-top-right-radius:var(--window-radius,var(--radius-m));border-top-left-radius:var(--window-radius,var(--radius-m));overflow-x:hidden!important;overflow-y:auto!important;display:flex!important;flex-direction:column!important;align-items:center!important;contain:inline-size}body #center-content>.obsidian-document>.markdown-preview-sizer{padding-bottom:80vh;width:100%;max-width:var(--line-width);flex-basis:var(--line-width);transition:background-color var(--color-fade-speed) ease-in-out;contain:inline-size}#center-content>.obsidian-document>div{width:100%!important;transition:background-color var(--color-fade-speed) ease-in-out;contain:inline-size}#center-content>.obsidian-document:not([data-type=markdown]).embed{display:flex;padding:1em;height:100%;width:100%;align-items:center;justify-content:center}#center-content>.obsidian-document:not([data-type=markdown]).embed>*{max-width:100%;max-height:100%;object-fit:contain}:not(h1,h2,h3,h4,h5,h6,li):has(> :is(.math,table)){overflow-x:auto!important}#center-content>.obsidian-document:not([data-type=markdown]){overflow-x:auto;contain:content;padding:0;margin:0;height:100%}.obsidian-document[data-type=attachment]{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;width:100%}.obsidian-document[data-type=attachment]>*{outline:0;border:none;box-shadow:none}.obsidian-document[data-type=attachment] :is(img){max-width:90%;max-height:90%;object-fit:contain}.obsidian-document[data-type=attachment]>:is(audio){width:100%;max-width:min(90%,var(--line-width))}.obsidian-document[data-type=attachment]>:is(embed,iframe,video){width:100%;height:100%;max-width:100%;max-height:100%;object-fit:contain}.canvas-wrapper>:is(.header,.footer){z-index:100;position:absolute;display:flex;justify-content:center;flex-direction:column;width:100%;align-items:center}.scroll-highlight{position:absolute;width:100%;height:100%;pointer-events:none;z-index:1000;background-color:hsla(var(--color-accent-hsl),.25);opacity:0;padding:1em;inset:50%;translate:-50% -50%;border-radius:var(--radius-s)}</style><script defer="">async function loadIncludes(){let e=document.querySelectorAll("link[itemprop='include']");for(const t of e){let e=t.getAttribute("href");try{let o="";if(e.startsWith("https:")||e.startsWith("http:")||"file:"!=window.location.protocol){const n=await fetch(e);if(!n.ok){console.log("Could not include file: "+e),t?.remove();continue}o=await n.text()}else{const t=document.getElementById(btoa(encodeURI(e)));if(t){const e=JSON.parse(decodeURI(atob(t.getAttribute("value")??"")));o=e?.data??""}}let n=document.createRange().createContextualFragment(o);t.before(n),t.remove(),console.log("Included text: "+o),console.log("Included file: "+e)}catch(o){t?.remove(),console.log("Could not include file: "+e,o);continue}}}document.addEventListener("DOMContentLoaded",(()=>{loadIncludes()}));let isFileProtocol="file:"==location.protocol;function waitLoadScripts(e,t){let o=e.map((e=>document.getElementById(e+"-script")));!function e(n){let l=o[n],c=n+1;l?(l&&"true"!=l.getAttribute("loaded")||n<o.length&&e(c),n<o.length&&l.addEventListener("load",(()=>e(c)))):n<o.length?e(c):t()}(0)}</script></head><body class="publish css-settings-manager is-frameless is-hidden-frameless styled-scrollbars show-inline-title show-ribbon ctp-latte ctp-mocha-old ctp-accent-mauve anp-callout-block anp-callout-color-toggle anp-latex-inline-mauve anp-latex-block-mauve anp-table-toggle anp-table-width anp-table-auto anp-hide-external-link-icon anp-h1-red anp-h1-divider anp-h2-peach anp-h3-green anp-h4-teal anp-h5-lavender anp-h6-mauve anp-decoration-toggle anp-bold-lavender anp-highlight-yellow anp-canvas-dark-bg anp-default-tab anp-theme-ext-dark ctp-luminescence-light ctp-material-mint-dark is-focused"><script defer="">let theme=localStorage.getItem("theme")||(window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");"dark"==theme?(document.body.classList.add("theme-dark"),document.body.classList.remove("theme-light")):(document.body.classList.add("theme-light"),document.body.classList.remove("theme-dark")),window.innerWidth<480?document.body.classList.add("is-phone"):window.innerWidth<768?document.body.classList.add("is-tablet"):window.innerWidth<1024?document.body.classList.add("is-small-screen"):document.body.classList.add("is-large-screen")</script><div id="main"><div id="navbar"></div><div id="main-horizontal"><div id="left-content" class="leaf" style="--sidebar-width: var(--sidebar-width-left);"><div id="left-sidebar" class="sidebar"><div class="sidebar-handle"></div><div class="sidebar-topbar"><div class="topbar-content"><div id="search-container"><div id="search-wrapper"><input enterkeyhint="search" type="search" spellcheck="false" placeholder="Search..."><div aria-label="Clear search" id="search-clear-button"></div></div></div></div><div class="clickable-icon sidebar-collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="svg-icon"><path d="M21 3H3C1.89543 3 1 3.89543 1 5V19C1 20.1046 1.89543 21 3 21H21C22.1046 21 23 20.1046 23 19V5C23 3.89543 22.1046 3 21 3Z"></path><path d="M10 4V20"></path><path d="M4 7H7"></path><path d="M4 10H7"></path><path d="M4 13H7"></path></svg></div></div><div class="sidebar-content-wrapper"><div id="left-sidebar-content" class="leaf-content"><link itemprop="include" href="site-lib/html/file-tree-content.html"></div></div><script defer="">let ls = document.querySelector("#left-sidebar"); ls.classList.toggle("is-collapsed", window.innerWidth < 768); ls.style.setProperty("--sidebar-width", localStorage.getItem("sidebar-left-width"));</script></div></div><div id="center-content" class="leaf"><div class="obsidian-document markdown-preview-view markdown-rendered node-insert-event is-readable-line-width allow-fold-headings allow-fold-lists show-indentation-guide show-properties" data-type="markdown"><style id="MJX-CHTML-styles">mjx-c.mjx-c1D6FC.TEX-I::before{padding:.442em .64em .011em 0;content:"α"}mjx-c.mjx-c221E::before{padding:.442em 1em .011em 0;content:"∞"}mjx-c.mjx-cD7::before{padding:.491em .778em 0 0;content:"×"}mjx-c.mjx-c2286::before{padding:.636em .778em .138em 0;content:"⊆"}mjx-c.mjx-c2208::before{padding:.54em .667em .04em 0;content:"∈"}mjx-c.mjx-c2229::before{padding:.598em .667em .022em 0;content:"∩"}mjx-c.mjx-c2192::before{padding:.511em 1em .011em 0;content:"→"}mjx-c.mjx-c2026::before{padding:.12em 1.172em 0 0;content:"…"}mjx-c.mjx-c22C5::before{padding:.31em .278em 0 0;content:"⋅"}mjx-c.mjx-c20D7.TEX-V::before{padding:.714em .5em 0 0;content:"→"}mjx-c.mjx-c1D44A.TEX-I::before{padding:.683em 1.048em .022em 0;content:"W"}mjx-c.mjx-c46::before{padding:.68em .653em 0 0;content:"F"}mjx-c.mjx-c41::before{padding:.716em .75em 0 0;content:"A"}mjx-c.mjx-c42::before{padding:.683em .708em 0 0;content:"B"}mjx-c.mjx-c230A::before{padding:.75em .444em .25em 0;content:"⌊"}mjx-c.mjx-c230B::before{padding:.75em .444em .25em 0;content:"⌋"}mjx-c.mjx-c2308::before{padding:.75em .444em .25em 0;content:"⌈"}mjx-c.mjx-c2309::before{padding:.75em .444em .25em 0;content:"⌉"}mjx-c.mjx-c1D43B.TEX-I::before{padding:.683em .888em 0 0;content:"H"}mjx-stretchy-v.mjx-c7B mjx-beg mjx-c::before{content:"⎧";padding:.899em .889em .01em 0}mjx-stretchy-v.mjx-c7B mjx-ext mjx-c::before{content:"⎪";width:.889em}mjx-stretchy-v.mjx-c7B mjx-end mjx-c::before{content:"⎩";padding:.01em .889em .899em 0}mjx-stretchy-v.mjx-c7B mjx-mid mjx-c::before{content:"⎨";padding:1.16em .889em .66em 0}mjx-stretchy-v.mjx-c7B>mjx-mid{margin-top:-.91em;margin-bottom:-.91em}mjx-stretchy-v.mjx-c7B>mjx-end{margin-top:-.909em}mjx-stretchy-v.mjx-c7B>mjx-ext{height:50%;border-top-width:.879em;border-bottom-width:.879em}mjx-c.mjx-c50::before{padding:.683em .681em 0 0;content:"P"}mjx-c.mjx-c74::before{padding:.615em .389em .01em 0;content:"t"}mjx-c.mjx-c20::before{padding:0 .25em 0 0;content:" "}mjx-c.mjx-c67::before{padding:.453em .5em .206em 0;content:"g"}mjx-c.mjx-c2190::before{padding:.511em 1em .011em 0;content:"←"}mjx-c.mjx-c1D442.TEX-I::before{padding:.704em .763em .022em 0;content:"O"}mjx-c.mjx-c1D45E.TEX-I::before{padding:.442em .46em .194em 0;content:"q"}mjx-c.mjx-c3A::before{padding:.43em .278em 0 0;content:":"}mjx-c.mjx-c24::before{padding:.75em .5em .056em 0;content:"$"}mjx-c.mjx-c64::before{padding:.694em .556em .011em 0;content:"d"}mjx-c.mjx-c73::before{padding:.448em .394em .011em 0;content:"s"}mjx-c.mjx-c7A::before{padding:.431em .444em 0 0;content:"z"}mjx-c.mjx-c2217::before{padding:.465em .5em 0 0;content:"∗"}mjx-c.mjx-c1D454.TEX-I::before{padding:.442em .477em .205em 0;content:"g"}mjx-c.mjx-c1D446.TEX-I::before{padding:.705em .645em .022em 0;content:"S"}mjx-c.mjx-c7B::before{padding:.75em .5em .25em 0;content:"{"}mjx-c.mjx-c7D::before{padding:.75em .5em .25em 0;content:"}"}mjx-c.mjx-c1D44B.TEX-I::before{padding:.683em .852em 0 0;content:"X"}mjx-c.mjx-c1D44C.TEX-I::before{padding:.683em .763em 0 0;content:"Y"}mjx-c.mjx-c1D45D.TEX-I::before{padding:.442em .503em .194em 0;content:"p"}mjx-c.mjx-c1D447.TEX-I::before{padding:.677em .704em 0 0;content:"T"}mjx-c.mjx-c1D43F.TEX-I::before{padding:.683em .681em 0 0;content:"L"}mjx-c.mjx-cB7::before{padding:.31em .278em 0 0;content:"⋅"}mjx-c.mjx-c2211.TEX-S2::before{padding:.95em 1.444em .45em 0;content:"∑"}mjx-c.mjx-c1D457.TEX-I::before{padding:.661em .412em .204em 0;content:"j"}mjx-c.mjx-c1D452.TEX-I::before{padding:.442em .466em .011em 0;content:"e"}mjx-c.mjx-c1D445.TEX-I::before{padding:.683em .759em .021em 0;content:"R"}mjx-c.mjx-c3B::before{padding:.43em .278em .194em 0;content:";"}mjx-mtable{display:inline-block;text-align:center;vertical-align:.25em;position:relative;box-sizing:border-box;border-spacing:0px;border-collapse:collapse}mjx-mstyle[size="s"] mjx-mtable{vertical-align:.354em}mjx-labels{position:absolute;left:0;top:0}mjx-table{display:inline-block;vertical-align:-.5ex;box-sizing:border-box}mjx-table>mjx-itable{vertical-align:middle;text-align:left;box-sizing:border-box}mjx-labels>mjx-itable{position:absolute;top:0}mjx-mtable[justify=left]{text-align:left}mjx-mtable[justify=right]{text-align:right}mjx-mtable[justify=left][side=left]{padding-right:0!important}mjx-mtable[justify=left][side=right]{padding-left:0!important}mjx-mtable[justify=right][side=left]{padding-right:0!important}mjx-mtable[justify=right][side=right]{padding-left:0!important}mjx-mtable[align]{vertical-align:baseline}mjx-mtable[align=top]>mjx-table{vertical-align:top}mjx-mtable[align=bottom]>mjx-table{vertical-align:bottom}mjx-mtable[side=right] mjx-labels{min-width:100%}mjx-mtr{display:table-row;text-align:left}mjx-mtr[rowalign=top]>mjx-mtd{vertical-align:top}mjx-mtr[rowalign=center]>mjx-mtd{vertical-align:middle}mjx-mtr[rowalign=bottom]>mjx-mtd{vertical-align:bottom}mjx-mtr[rowalign=baseline]>mjx-mtd{vertical-align:baseline}mjx-mtr[rowalign=axis]>mjx-mtd{vertical-align:.25em}mjx-mtd{display:table-cell;text-align:center;padding:.215em .4em}mjx-mtd:first-child{padding-left:0}mjx-mtd:last-child{padding-right:0}mjx-mtable>*>mjx-itable>:first-child>mjx-mtd{padding-top:0}mjx-mtable>*>mjx-itable>:last-child>mjx-mtd{padding-bottom:0}mjx-tstrut{display:inline-block;height:1em;vertical-align:-.25em}mjx-labels[align=left]>mjx-mtr>mjx-mtd{text-align:left}mjx-labels[align=right]>mjx-mtr>mjx-mtd{text-align:right}mjx-mtd[extra]{padding:0}mjx-mtd[rowalign=top]{vertical-align:top}mjx-mtd[rowalign=center]{vertical-align:middle}mjx-mtd[rowalign=bottom]{vertical-align:bottom}mjx-mtd[rowalign=baseline]{vertical-align:baseline}mjx-mtd[rowalign=axis]{vertical-align:.25em}mjx-c.mjx-c1D464.TEX-I::before{padding:.443em .716em .011em 0;content:"w"}mjx-c.mjx-c2264::before{padding:.636em .778em .138em 0;content:"≤"}mjx-c.mjx-c3C::before{padding:.54em .778em .04em 0;content:"<"}mjx-c.mjx-c7B.TEX-S3::before{padding:1.45em .75em .949em 0;content:"{"}mjx-c.mjx-c4E::before{padding:.683em .75em 0 0;content:"N"}mjx-c.mjx-c6F::before{padding:.448em .5em .01em 0;content:"o"}mjx-c.mjx-c72::before{padding:.442em .392em 0 0;content:"r"}mjx-c.mjx-c6C::before{padding:.694em .278em 0 0;content:"l"}mjx-c.mjx-c4F::before{padding:.705em .778em .022em 0;content:"O"}mjx-c.mjx-c76::before{padding:.431em .528em .011em 0;content:"v"}mjx-c.mjx-c65::before{padding:.448em .444em .011em 0;content:"e"}mjx-c.mjx-c66::before{padding:.705em .372em 0 0;content:"f"}mjx-c.mjx-c77::before{padding:.431em .722em .011em 0;content:"w"}mjx-c.mjx-c1D448.TEX-I::before{padding:.683em .767em .022em 0;content:"U"}mjx-c.mjx-c1D440.TEX-I::before{padding:.683em 1.051em 0 0;content:"M"}mjx-c.mjx-c2250::before{padding:.67em .778em 0 0;content:"≐"}mjx-c.mjx-c23::before{padding:.694em .833em .194em 0;content:"#"}mjx-c.mjx-c3E::before{padding:.54em .778em .04em 0;content:">"}mjx-c.mjx-c1D436.TEX-I::before{padding:.705em .76em .022em 0;content:"C"}mjx-c.mjx-c2032::before{padding:.56em .275em 0 0;content:"′"}mjx-c.mjx-c5B::before{padding:.75em .278em .25em 0;content:"["}mjx-c.mjx-c1D458.TEX-I::before{padding:.694em .521em .011em 0;content:"k"}mjx-c.mjx-c5D::before{padding:.75em .278em .25em 0;content:"]"}mjx-c.mjx-c1D43E.TEX-I::before{padding:.683em .889em 0 0;content:"K"}mjx-c.mjx-c1D43C.TEX-I::before{padding:.683em .504em 0 0;content:"I"}mjx-c.mjx-c1D449.TEX-I::before{padding:.683em .769em .022em 0;content:"V"}mjx-c.mjx-c2212::before{padding:.583em .778em .082em 0;content:"−"}mjx-c.mjx-c2216::before{padding:.75em .5em .25em 0;content:"∖"}.mjx-stretched mjx-c.mjx-c2013::before{content:"–"}mjx-stretchy-h.mjx-c2013 mjx-ext mjx-c::before{content:"–";padding:.285em 0 0}mjx-c.mjx-c2295::before{padding:.583em .778em .083em 0;content:"⊕"}mjx-msup{display:inline-block;text-align:left}mjx-mover{display:inline-block;text-align:left}mjx-mover:not([limits=false]){padding-top:.1em}mjx-mover:not([limits=false])>*{display:block;text-align:left}mjx-c.mjx-c1D710.TEX-I::before{padding:.443em .54em .01em 0;content:"υ"}mjx-c.mjx-c1D467.TEX-I::before{padding:.442em .465em .011em 0;content:"z"}mjx-c.mjx-cAF::before{padding:.59em .5em 0 0;content:"¯"}mjx-c.mjx-c1D466.TEX-I::before{padding:.442em .49em .205em 0;content:"y"}mjx-mtext{display:inline-block;text-align:left}mjx-c.mjx-c1D465.TEX-I::before{padding:.442em .572em .011em 0;content:"x"}mjx-c.mjx-c1D438.TEX-I::before{padding:.68em .764em 0 0;content:"E"}mjx-c.mjx-c1D450.TEX-I::before{padding:.442em .433em .011em 0;content:"c"}mjx-c.mjx-cA0::before{padding:0 .25em 0 0;content:" "}mjx-c.mjx-c33::before{padding:.665em .5em .022em 0;content:"3"}mjx-texatom{display:inline-block;text-align:left}mjx-mrow{display:inline-block;text-align:left}mjx-mfrac{display:inline-block;text-align:left}mjx-frac{display:inline-block;vertical-align:.17em;padding:0 .22em}mjx-frac[type="d"]{vertical-align:.04em}mjx-frac[delims]{padding:0 .1em}mjx-frac[atop]{padding:0 .12em}mjx-frac[atop][delims]{padding:0}mjx-dtable{display:inline-table;width:100%}mjx-dtable>*{font-size:2000%}mjx-dbox{display:block;font-size:5%}mjx-num{display:block;text-align:center}mjx-den{display:block;text-align:center}mjx-mfrac[bevelled]>mjx-num{display:inline-block}mjx-mfrac[bevelled]>mjx-den{display:inline-block}mjx-den[align=right],mjx-num[align=right]{text-align:right}mjx-den[align=left],mjx-num[align=left]{text-align:left}mjx-nstrut{display:inline-block;height:.054em;width:0;vertical-align:-.054em}mjx-nstrut[type="d"]{height:.217em;vertical-align:-.217em}mjx-dstrut{display:inline-block;height:.505em;width:0}mjx-dstrut[type="d"]{height:.726em}mjx-line{display:block;box-sizing:border-box;min-height:1px;height:.06em;border-top:.06em solid;margin:.06em -.1em;overflow:hidden}mjx-line[type="d"]{margin:.18em -.1em}mjx-mspace{display:inline-block;text-align:left}mjx-munderover{display:inline-block;text-align:left}mjx-munderover:not([limits=false]){padding-top:.1em}mjx-munderover:not([limits=false])>*{display:block}mjx-msubsup{display:inline-block;text-align:left}mjx-script{display:inline-block;padding-right:.05em;padding-left:.033em}mjx-script>mjx-spacer{display:block}mjx-c.mjx-c1D462.TEX-I::before{padding:.442em .572em .011em 0;content:"u"}mjx-c.mjx-c1D460.TEX-I::before{padding:.442em .469em .01em 0;content:"s"}mjx-c.mjx-c1D456.TEX-I::before{padding:.661em .345em .011em 0;content:"i"}mjx-c.mjx-c1D451.TEX-I::before{padding:.694em .52em .01em 0;content:"d"}mjx-c.mjx-c1D439.TEX-I::before{padding:.68em .749em 0 0;content:"F"}mjx-c.mjx-c1D441.TEX-I::before{padding:.683em .888em 0 0;content:"N"}mjx-c.mjx-c2F::before{padding:.75em .5em .25em 0;content:"/"}mjx-c.mjx-c1D461.TEX-I::before{padding:.626em .361em .011em 0;content:"t"}mjx-c.mjx-c1D45C.TEX-I::before{padding:.441em .485em .011em 0;content:"o"}mjx-c.mjx-c1D459.TEX-I::before{padding:.694em .298em .011em 0;content:"l"}mjx-c.mjx-c3D::before{padding:.583em .778em .082em 0;content:"="}mjx-c.mjx-c2B::before{padding:.583em .778em .082em 0;content:"+"}mjx-c.mjx-c1D437.TEX-I::before{padding:.683em .828em 0 0;content:"D"}mjx-c.mjx-c1D443.TEX-I::before{padding:.683em .751em 0 0;content:"P"}mjx-c.mjx-c2265::before{padding:.636em .778em .138em 0;content:"≥"}mjx-c.mjx-c6D::before{padding:.442em .833em 0 0;content:"m"}mjx-c.mjx-c61::before{padding:.448em .5em .011em 0;content:"a"}mjx-c.mjx-c78::before{padding:.431em .528em 0 0;content:"x"}mjx-c.mjx-c7B.TEX-S4::before{padding:1.75em .806em 1.249em 0;content:"{"}mjx-c.mjx-c69::before{padding:.669em .278em 0 0;content:"i"}mjx-c.mjx-c6E::before{padding:.442em .556em 0 0;content:"n"}mjx-c.mjx-c2211.TEX-S1::before{padding:.75em 1.056em .25em 0;content:"∑"}mjx-c.mjx-c7D.TEX-S4::before{padding:1.75em .806em 1.249em 0;content:"}"}mjx-c.mjx-c210E.TEX-I::before{padding:.694em .576em .011em 0;content:"h"}mjx-c.mjx-c1D45F.TEX-I::before{padding:.442em .451em .011em 0;content:"r"}mjx-c.mjx-c30::before{padding:.666em .5em .022em 0;content:"0"}mjx-msub{display:inline-block;text-align:left}mjx-c.mjx-c1D453.TEX-I::before{padding:.705em .55em .205em 0;content:"f"}mjx-c.mjx-c1D45B.TEX-I::before{padding:.442em .6em .011em 0;content:"n"}mjx-c.mjx-c1D45A.TEX-I::before{padding:.442em .878em .011em 0;content:"m"}mjx-c.mjx-c1D463.TEX-I::before{padding:.443em .485em .011em 0;content:"v"}mjx-c.mjx-c2E::before{padding:.12em .278em 0 0;content:"."}mjx-c.mjx-c28::before{padding:.75em .389em .25em 0;content:"("}mjx-c.mjx-c29::before{padding:.75em .389em .25em 0;content:")"}mjx-c.mjx-c1D44E.TEX-I::before{padding:.441em .529em .01em 0;content:"a"}mjx-c.mjx-c2C::before{padding:.121em .278em .194em 0;content:","}mjx-c.mjx-c1D44F.TEX-I::before{padding:.694em .429em .011em 0;content:"b"}mjx-mo{display:inline-block;text-align:left}mjx-stretchy-h{display:inline-table;width:100%}mjx-stretchy-h>*{display:table-cell;width:0}mjx-stretchy-h>*>mjx-c{display:inline-block;transform:scaleX(1)}mjx-stretchy-h>*>mjx-c::before{display:inline-block;width:initial}mjx-stretchy-h>mjx-ext{overflow:clip visible;width:100%}mjx-stretchy-h>mjx-ext>mjx-c::before{transform:scaleX(500)}mjx-stretchy-h>mjx-ext>mjx-c{width:0}mjx-stretchy-h>mjx-beg>mjx-c{margin-right:-.1em}mjx-stretchy-h>mjx-end>mjx-c{margin-left:-.1em}mjx-stretchy-v{display:inline-block}mjx-stretchy-v>*{display:block}mjx-stretchy-v>mjx-beg{height:0}mjx-stretchy-v>mjx-end>mjx-c{display:block}mjx-stretchy-v>*>mjx-c{transform:scaleY(1);transform-origin:left center;overflow:hidden}mjx-stretchy-v>mjx-ext{display:block;height:100%;box-sizing:border-box;border:0 solid transparent;overflow:visible clip}mjx-stretchy-v>mjx-ext>mjx-c::before{width:initial;box-sizing:border-box}mjx-stretchy-v>mjx-ext>mjx-c{transform:scaleY(500) translateY(.075em);overflow:visible}mjx-mark{display:inline-block;height:0}mjx-c.mjx-c26::before{padding:.716em .778em .022em 0;content:"&"}mjx-c.mjx-c7C::before{padding:.75em .278em .249em 0;content:"|"}mjx-c.mjx-c21::before{padding:.716em .278em 0 0;content:"!"}mjx-c.mjx-c1D434.TEX-I::before{padding:.716em .75em 0 0;content:"A"}mjx-mi{display:inline-block;text-align:left}mjx-c.mjx-c1D435.TEX-I::before{padding:.683em .759em 0 0;content:"B"}mjx-c.mjx-c34::before{padding:.677em .5em 0 0;content:"4"}mjx-c.mjx-c36::before{padding:.666em .5em .022em 0;content:"6"}mjx-c.mjx-c32::before{padding:.666em .5em 0 0;content:"2"}mjx-c.mjx-c38::before{padding:.666em .5em .022em 0;content:"8"}mjx-container[jax=CHTML]{line-height:0}mjx-container [space="1"]{margin-left:.111em}mjx-container [space="2"]{margin-left:.167em}mjx-container [space="3"]{margin-left:.222em}mjx-container [space="4"]{margin-left:.278em}mjx-container [space="5"]{margin-left:.333em}mjx-container [rspace="1"]{margin-right:.111em}mjx-container [rspace="2"]{margin-right:.167em}mjx-container [rspace="3"]{margin-right:.222em}mjx-container [rspace="4"]{margin-right:.278em}mjx-container [rspace="5"]{margin-right:.333em}mjx-container [size="s"]{font-size:70.7%}mjx-container [size=ss]{font-size:50%}mjx-container [size=Tn]{font-size:60%}mjx-container [size=sm]{font-size:85%}mjx-container [size=lg]{font-size:120%}mjx-container [size=Lg]{font-size:144%}mjx-container [size=LG]{font-size:173%}mjx-container [size=hg]{font-size:207%}mjx-container [size=HG]{font-size:249%}mjx-container [width=full]{width:100%}mjx-box{display:inline-block}mjx-block{display:block}mjx-itable{display:inline-table}mjx-row{display:table-row}mjx-row>*{display:table-cell}mjx-mtext{display:inline-block}mjx-mstyle{display:inline-block}mjx-merror{display:inline-block;color:red;background-color:#ff0}mjx-mphantom{visibility:hidden}mjx-assistive-mml{top:0;left:0;clip:rect(1px,1px,1px,1px);user-select:none;position:absolute!important;padding:1px 0 0!important;border:0!important;display:block!important;width:auto!important;overflow:hidden!important}mjx-assistive-mml[display=block]{width:100%!important}mjx-math{display:inline-block;text-align:left;line-height:0;text-indent:0;font-style:normal;font-weight:400;font-size:100%;font-size-adjust:none;letter-spacing:normal;border-collapse:collapse;overflow-wrap:normal;word-spacing:normal;white-space:nowrap;direction:ltr;padding:1px 0}mjx-container[jax=CHTML][display=true]{display:block;text-align:center;margin:1em 0}mjx-container[jax=CHTML][display=true][width=full]{display:flex}mjx-container[jax=CHTML][display=true] mjx-math{padding:0}mjx-container[jax=CHTML][justify=left]{text-align:left}mjx-container[jax=CHTML][justify=right]{text-align:right}mjx-mn{display:inline-block;text-align:left}mjx-c{display:inline-block}mjx-utext{display:inline-block;padding:.75em 0 .2em}mjx-c::before{display:block;width:0}.MJX-TEX{font-family:MJXZERO,MJXTEX}.TEX-B{font-family:MJXZERO,MJXTEX-B}.TEX-I{font-family:MJXZERO,MJXTEX-I}.TEX-MI{font-family:MJXZERO,MJXTEX-MI}.TEX-BI{font-family:MJXZERO,MJXTEX-BI}.TEX-S1{font-family:MJXZERO,MJXTEX-S1}.TEX-S2{font-family:MJXZERO,MJXTEX-S2}.TEX-S3{font-family:MJXZERO,MJXTEX-S3}.TEX-S4{font-family:MJXZERO,MJXTEX-S4}.TEX-A{font-family:MJXZERO,MJXTEX-A}.TEX-C{font-family:MJXZERO,MJXTEX-C}.TEX-CB{font-family:MJXZERO,MJXTEX-CB}.TEX-FR{font-family:MJXZERO,MJXTEX-FR}.TEX-FRB{font-family:MJXZERO,MJXTEX-FRB}.TEX-SS{font-family:MJXZERO,MJXTEX-SS}.TEX-SSB{font-family:MJXZERO,MJXTEX-SSB}.TEX-SSI{font-family:MJXZERO,MJXTEX-SSI}.TEX-SC{font-family:MJXZERO,MJXTEX-SC}.TEX-T{font-family:MJXZERO,MJXTEX-T}.TEX-V{font-family:MJXZERO,MJXTEX-V}.TEX-VB{font-family:MJXZERO,MJXTEX-VB}mjx-stretchy-h mjx-c,mjx-stretchy-v mjx-c{font-family:MJXZERO,MJXTEX-S1,MJXTEX-S4,MJXTEX,MJXTEX-A!important}@font-face{font-family:MJXZERO;src:url("site-lib/fonts/MathJax_Zero.woff") format("woff")}@font-face{font-family:MJXTEX;src:url("site-lib/fonts/MathJax_Main-Regular.woff") format("woff")}@font-face{font-family:MJXTEX-B;src:url("site-lib/fonts/MathJax_Main-Bold.woff") format("woff")}@font-face{font-family:MJXTEX-I;src:url("site-lib/fonts/MathJax_Math-Italic.woff") format("woff")}@font-face{font-family:MJXTEX-MI;src:url("site-lib/fonts/MathJax_Main-Italic.woff") format("woff")}@font-face{font-family:MJXTEX-BI;src:url("site-lib/fonts/MathJax_Math-BoldItalic.woff") format("woff")}@font-face{font-family:MJXTEX-S1;src:url("site-lib/fonts/MathJax_Size1-Regular.woff") format("woff")}@font-face{font-family:MJXTEX-S2;src:url("site-lib/fonts/MathJax_Size2-Regular.woff") format("woff")}@font-face{font-family:MJXTEX-S3;src:url("site-lib/fonts/MathJax_Size3-Regular.woff") format("woff")}@font-face{font-family:MJXTEX-S4;src:url("site-lib/fonts/MathJax_Size4-Regular.woff") format("woff")}@font-face{font-family:MJXTEX-A;src:url("site-lib/fonts/MathJax_AMS-Regular.woff") format("woff")}@font-face{font-family:MJXTEX-C;src:url("site-lib/fonts/MathJax_Calligraphic-Regular.woff") format("woff")}@font-face{font-family:MJXTEX-CB;src:url("site-lib/fonts/MathJax_Calligraphic-Bold.woff") format("woff")}@font-face{font-family:MJXTEX-FR;src:url("site-lib/fonts/MathJax_Fraktur-Regular.woff") format("woff")}@font-face{font-family:MJXTEX-FRB;src:url("site-lib/fonts/MathJax_Fraktur-Bold.woff") format("woff")}@font-face{font-family:MJXTEX-SS;src:url("site-lib/fonts/MathJax_SansSerif-Regular.woff") format("woff")}@font-face{font-family:MJXTEX-SSB;src:url("site-lib/fonts/MathJax_SansSerif-Bold.woff") format("woff")}@font-face{font-family:MJXTEX-SSI;src:url("site-lib/fonts/MathJax_SansSerif-Italic.woff") format("woff")}@font-face{font-family:MJXTEX-SC;src:url("site-lib/fonts/MathJax_Script-Regular.woff") format("woff")}@font-face{font-family:MJXTEX-T;src:url("site-lib/fonts/MathJax_Typewriter-Regular.woff") format("woff")}@font-face{font-family:MJXTEX-V;src:url("site-lib/fonts/MathJax_Vector-Regular.woff") format("woff")}@font-face{font-family:MJXTEX-VB;src:url("site-lib/fonts/MathJax_Vector-Bold.woff") format("woff")}mjx-c.mjx-c31::before{padding:.666em .5em 0 0;content:"1"}mjx-c.mjx-c39::before{padding:.666em .5em .022em 0;content:"9"}mjx-c.mjx-c35::before{padding:.666em .5em .022em 0;content:"5"}mjx-c.mjx-c37::before{padding:.676em .5em .022em 0;content:"7"}</style><div class="markdown-preview-sizer markdown-preview-section"><div class="header"><h1 class="page-title heading inline-title" id="Nmap_0">Nmap</h1><div class="data-bar"></div></div><div class="markdown-preview-pusher" style="width: 1px; height: 0.1px; margin-bottom: 0px;"></div><div class="el-p"><p dir="auto"><a href="?query=tag:HTools" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#HTools">#HTools</a> <a href="?query=tag:Reconnaissance" class="tag is-unresolved" target="_self" rel="noopener nofollow" data-href="#Reconnaissance">#Reconnaissance</a></p></div><div class="el-p"><p dir="auto">Nmap is a tool for mapping networks, identifying live hosts, and discovering running services.</p></div><div class="el-p"><p dir="auto">A Nmap scan usually goes through the steps shown in the figure below, although many are optional and depend on the command-line arguments you provide.<br>
+<span alt="image.png" src="assets/image_1746227923137_0.png" class="internal-embed media-embed image-embed is-loaded" target="_self" style="width: 300px; max-width: 100%;"><img alt="image.png" src="assets/image_1746227923137_0.png" target="_self" style="width: 300px; max-width: 100%;"></span></p></div><div class="el-h1"><h1 data-heading="Live Host Discovery" dir="auto" class="heading" id="Live_Host_Discovery_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>Live Host Discovery</h1></div><div class="el-h2"><h2 data-heading="Subnetworks" dir="auto" class="heading" id="Subnetworks_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>Subnetworks</h2></div><div class="el-p"><p dir="auto">A <em>network segment</em> is a group of computers connected using a shared medium. For instance, the medium can be the Ethernet switch or WiFi access point.</p></div><div class="el-p"><p dir="auto">In an IP network, a <em>subnetwork</em> is usually the equivalent of one or more network segments connected together and configured to use the same router.</p></div><div class="el-p"><p dir="auto">The network segment refers to a physical connection, while a subnetwork refers to a logical connection.</p></div><div class="el-ul"><ul class="has-list-bullet">
+<li data-line="0" dir="auto"><span class="list-bullet"></span>A subnetwork, or simply a subnet, has its own IP address range and is connected to a more extensive network via a router.<br>
+<span alt="image.png" src="assets/image_1746228414228_0.png" class="internal-embed media-embed image-embed is-loaded" target="_self" style="width: 400px; max-width: 100%;"><img alt="image.png" src="assets/image_1746228414228_0.png" target="_self" style="width: 400px; max-width: 100%;"></span><br>
+The figure above shows two types of subnets:</li>
+<li data-line="3" dir="auto"><span class="list-bullet"></span>Subnets with <code>/16</code>, which means that the subnet mask can be written as <code>255.255.0.0</code>. This subnet can have around 65 thousand hosts.</li>
+<li data-line="4" dir="auto"><span class="list-bullet"></span>Subnets with <code>/24</code>, which indicates that the subnet mask can be expressed as <code>255.255.255.0</code>. This subnet can have around 250 hosts.</li>
+</ul></div><div class="el-p"><p dir="auto">ARP(Address Resolution Protocol) is responsible for finding the MAC (hardware) address related to a specific IP address. It works by broadcasting an ARP query, "Who has this IP address? Tell me." And the  response is of the form, "The IP address is at this MAC address."</p></div><div class="el-p"><p dir="auto">ARP is a link-layer protocol, and ARP packets are bound to their subnet.</p></div><div class="el-h1"><h1 data-heading="Enumerating targets" dir="auto" class="heading" id="Enumerating_targets_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>Enumerating targets</h1></div><div class="el-p"><p dir="auto">you can provide a list, a range, or a subnet. Examples of target specification are:</p></div><div class="el-ul"><ul class="has-list-bullet">
+<li data-line="0" dir="auto"><span class="list-bullet"></span>list: <code>MACHINE_IP scanme.nmap.org example.com</code> will scan 3 IP addresses.</li>
+<li data-line="1" dir="auto"><span class="list-bullet"></span>range: <code>10.11.12.15-20</code> will scan 6 IP addresses: <code>10.11.12.15</code>,  <code>10.11.12.16</code>,… and <code>10.11.12.20</code>.</li>
+<li data-line="2" dir="auto"><span class="list-bullet"></span>subnet: <code>MACHINE_IP/30</code> will scan 4 IP addresses.</li>
+</ul></div><div class="el-p"><p dir="auto">You can also provide a file as input for your list of targets, <code>nmap -iL list_of_hosts.txt</code>.</p></div><div class="el-p"><p dir="auto">Nmap will attempt a reverse-DNS resolution on all the targets to obtain their names. Names might reveal various information to the pentester. (If you don’t want Nmap to the DNS server, you can add <code>-n</code>.)</p></div><div class="el-h2"><h2 data-heading="Discovering Live Hosts" dir="auto" class="heading" id="Discovering_Live_Hosts_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>Discovering Live Hosts</h2></div><div class="el-p"><p dir="auto">We will leverage the protocols to discover the live hosts, we can use:<br>
+<span alt="image.png" src="assets/image_1746482512601_0.png" class="internal-embed media-embed image-embed is-loaded" target="_self"><img alt="image.png" src="assets/image_1746482512601_0.png" target="_self"></span><br>
+Before we discuss how scanners can use each in detail, we will briefly review these four protocols.</p></div><div class="el-ul"><ul class="has-list-bullet">
+<li data-line="0" dir="auto"><span class="list-bullet"></span><strong>ARP</strong> has one purpose: sending a frame to the broadcast address on the network segment and asking the computer with a specific IP address to respond by providing its MAC(hardware) address.</li>
+<li data-line="1" dir="auto"><span class="list-bullet"></span><strong>ICMP</strong> has many types. ICMP ping uses Type 8 (Echo) and Type 0 (Echo Reply).
+<blockquote dir="auto">
+<p>If you want to ping a system on the same subnet, an ARP query should precede the ICMP Echo.</p>
+</blockquote>
+</li>
+<li data-line="3" dir="auto"><span class="list-bullet"></span>Although <strong>TCP</strong> and <strong>UDP</strong> are transport layers, for network scanning purposes, a scanner can send a specially-crafted packet to common TCP or UDP ports to check whether the target will respond. This method is efficient, especially when ICMP Echo is blocked.</li>
+</ul></div><div class="el-h2"><h2 data-heading="Nmap Host Discovery Using ARP" dir="auto" class="heading" id="Nmap_Host_Discovery_Using_ARP_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>Nmap Host Discovery Using ARP</h2></div><div class="el-p"><p dir="auto">When no host discovery options are provided, Nmap follows the following approaches to discover live hosts:</p></div><div class="el-ul"><ul class="has-list-bullet">
+<li data-line="0" dir="auto"><span class="list-bullet"></span>When a <em>privileged</em> user tries to scan targets on a local network (Ethernet), Nmap uses <em>ARP requests</em>. A privileged user is <code>root</code> or a user who belongs to <code>sudoers</code> and can run <code>sudo</code>.</li>
+<li data-line="1" dir="auto"><span class="list-bullet"></span>When a <em>privileged</em> user tries to scan targets outside the local network, Nmap uses ICMP echo requests, (Acknowledge) to port 80, (Synchronize) to port 443, and ICMP timestamp request.</li>
+<li data-line="2" dir="auto"><span class="list-bullet"></span>When an <em>unprivileged</em> user tries to scan targets outside the local network, Nmap resorts to a TCP 3-way handshake by sending SYN packets to ports 80 and 443.</li>
+<li data-line="3" dir="auto"><span class="list-bullet"></span>The ARP query only works if the target is on the same subnet as yourself, i.e., on the same Ethernet/WiFi. You should expect to see many ARP queries generated during a Nmap scan of a local network. If you want Nmap only to perform an ARP scan without port-scanning, you can use <code>nmap -PR -sn TARGETS</code>, where<code>-PR</code> indicates that you only want an ARP scan.</li>
+<li data-line="4" dir="auto"><span class="list-bullet"></span>A more detailed scan for ARP queries is <code>arp-scan</code>.</li>
+</ul></div><div class="el-h2"><h2 data-heading="Nmap Host Discovery Using ICMP" dir="auto" class="heading" id="Nmap_Host_Discovery_Using_ICMP_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>Nmap Host Discovery Using ICMP</h2></div><div class="el-p"><p dir="auto">We can ping every IP address on a target network and see who would respond to our <code>ping</code> (ICMP Type 8/Echo) requests with a ping reply (ICMP Type 0), but many firewalls block ICMP echo; like new versions of MS Windows.</p></div><div class="el-ul"><ul class="has-list-bullet">
+<li data-line="0" dir="auto"><span class="list-bullet"></span>To use ICMP echo request to discover live hosts, add the option <code>-PE</code>.</li>
+<li data-line="1" dir="auto"><span class="list-bullet"></span>Because ICMP echo requests tend to be blocked, you might also consider ICMP Timestamp (<code>-PP</code>)or ICMP Address Mask (<code>-PM</code>) requests to tell if a system is online</li>
+</ul></div><div class="el-h2"><h2 data-heading="Nmap Host Discovery Using TCP and UDP" dir="auto" class="heading" id="Nmap_Host_Discovery_Using_TCP_and_UDP_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>Nmap Host Discovery Using TCP and UDP</h2></div><div class="el-h3"><h3 data-heading="Ping" dir="auto" class="heading" id="Ping_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>Ping</h3></div><div class="el-p"><p dir="auto">We can send a packet with the SYN (Synchronize) flag set to a TCP port, 80 by default, and wait for a response. An open port should reply with a SYN/ACK (Acknowledge); a closed port would result in an RST (Reset).</p></div><div class="el-p"><p dir="auto">You can do this with <code>-PS</code> followed by the port number,range, list, or a combination of them. For example <code>-PS21-25</code><br>
+- Privileged users (root and sudoers) can send TCP SYN packets and don’t need to complete the TCP 3-way handshake even if the port is open. Unprivileged users have no choice but to complete the 3-way handshake if the port is open.<br>
+- ### ((6805b7a9-18d1-4e6f-987a-6f69c69e50b1)) Ping<br>
+- This sends a packet with an ACK flag set. You must be running Nmap as a privileged user to be able to accomplish this. If you try it as an unprivileged user, Nmap will attempt a 3-way handshake.<br>
+- Same as SYN ping port 80 is used, the option is <code>-PA</code><br>
+- ### ((6805b7a9-fad1-4520-9a99-89afe3f9c349)) Ping<br>
+- Contrary to TCP SYN ping, sending a UDP packet to an open port is not expected to lead to any reply. However, if we send a UDP packet to a closed UDP port, we expect to get an ICMP port unreachable packet; this indicates that the target system is up and available.<br>
+- The syntax is similar to the last two, but we use the option <code>-PU</code><br>
+- ## Reverse-DNS Lookup<br>
+collapsed:: true<br>
+- Nmap’s default behaviour is to use reverse-DNS online hosts. Because the hostnames can reveal a lot, this can be a helpful step. However, if you don’t want to send such DNS queries, you use <code>-n</code> to skip this step.<br>
+- By default, Nmap will look up online hosts; however, you can use the option <code>-R</code> to query the DNS server even for offline hosts. If you want to use a specific DNS server, you can add the&nbsp;<code>--dns-servers DNS_SERVER</code> option.<br>
+- collapsed:: true<br>
+| Scan Type              | Example Command                                         |<br>
+|------------------------|----------------------------------------------------------|<br>
+| ARP Scan               | <code>sudo nmap -PR -sn MACHINE_IP/24</code>                        |<br>
+| ICMP Echo Scan         | <code>sudo nmap -PE -sn MACHINE_IP/24</code>                        |<br>
+| ICMP Timestamp Scan    | <code>sudo nmap -PP -sn MACHINE_IP/24</code>                        |<br>
+| ICMP Address Mask Scan | <code>sudo nmap -PM -sn MACHINE_IP/24</code>                        |<br>
+| TCP SYN Ping Scan      | <code>sudo nmap -PS22,80,443 -sn MACHINE_IP/30</code>              |<br>
+| TCP ACK Ping Scan      | <code>sudo nmap -PA22,80,443 -sn MACHINE_IP/30</code>              |<br>
+| UDP Ping Scan          | <code>sudo nmap -PU53,161,162 -sn MACHINE_IP/30</code>          |<br>
+- | Scan Type |<br>
+| Example Command |<br>
+|<br>
+| ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- |<br>
+- |<br>
+| ARP Scan |<br>
+| <code>sudo nmap -PR -sn MACHINE_IP/24</code> |<br>
+|<br>
+- |<br>
+| ICMP Echo Scan |<br>
+| <code>sudo nmap -PE -sn MACHINE_IP/24</code> |<br>
+|<br>
+- |<br>
+| ICMP Timestamp Scan |<br>
+| <code>sudo nmap -PP -sn MACHINE_IP/24</code> |<br>
+|<br>
+- |<br>
+| ICMP Address Mask Scan |<br>
+| <code>sudo nmap -PM -sn MACHINE_IP/24</code> |<br>
+|<br>
+- |<br>
+| TCP SYN Ping Scan |<br>
+| <code>sudo nmap -PS22,80,443 -sn MACHINE_IP/30</code> |<br>
+|<br>
+- |<br>
+| TCP ACK Ping Scan |<br>
+| <code>sudo nmap -PA22,80,443 -sn MACHINE_IP/30</code> |<br>
+|<br>
+- |<br>
+| UDP Ping Scan |<br>
+| <code>sudo nmap -PU53,161,162 -sn MACHINE_IP/30</code> |<br>
+- | Scan Type |<br>
+| Example Command |<br>
+|<br>
+| ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- |<br>
+- |<br>
+| ARP Scan |<br>
+| <code>sudo nmap -PR -sn MACHINE_IP/24</code> |<br>
+|<br>
+- |<br>
+| ICMP Echo Scan |<br>
+| <code>sudo nmap -PE -sn MACHINE_IP/24</code> |<br>
+|<br>
+- |<br>
+| ICMP Timestamp Scan |<br>
+| <code>sudo nmap -PP -sn MACHINE_IP/24</code> |<br>
+|<br>
+- |<br>
+| ICMP Address Mask Scan |<br>
+| <code>sudo nmap -PM -sn MACHINE_IP/24</code> |<br>
+|<br>
+- |<br>
+| TCP SYN Ping Scan |<br>
+| <code>sudo nmap -PS22,80,443 -sn MACHINE_IP/30</code> |<br>
+|<br>
+- |<br>
+| TCP ACK Ping Scan |<br>
+| <code>sudo nmap -PA22,80,443 -sn MACHINE_IP/30</code> |<br>
+|<br>
+- |<br>
+| UDP Ping Scan |<br>
+| <code>sudo nmap -PU53,161,162 -sn MACHINE_IP/30</code> |<br>
+- |<br>
+| Scan Type |<br>
+| Example Command |<br>
+|<br>
+| ---- |<br>
+- |<br>
+| ARP Scan |<br>
+| <code>sudo nmap -PR -sn MACHINE_IP/24</code> |<br>
+|<br>
+- |<br>
+| ICMP Echo Scan |<br>
+| <code>sudo nmap -PE -sn MACHINE_IP/24</code> |<br>
+|<br>
+- |<br>
+| ICMP Timestamp Scan |<br>
+| <code>sudo nmap -PP -sn MACHINE_IP/24</code> |<br>
+|<br>
+- |<br>
+| ICMP Address Mask Scan |<br>
+| <code>sudo nmap -PM -sn MACHINE_IP/24</code> |<br>
+|<br>
+- |<br>
+| TCP SYN Ping Scan |<br>
+| <code>sudo nmap -PS22,80,443 -sn MACHINE_IP/30</code> |<br>
+|<br>
+- |<br>
+| TCP ACK Ping Scan |<br>
+| <code>sudo nmap -PA22,80,443 -sn MACHINE_IP/30</code> |<br>
+|<br>
+- |<br>
+| UDP Ping Scan |<br>
+| <code>sudo nmap -PU53,161,162 -sn MACHINE_IP/30</code> |<br>
+- |<br>
+| Scan Type |<br>
+| Example Command |<br>
+|<br>
+| ---- |<br>
+- |<br>
+| ARP Scan |<br>
+| <code>sudo nmap -PR -sn MACHINE_IP/24</code> |<br>
+|<br>
+- |<br>
+| ICMP Echo Scan |<br>
+| <code>sudo nmap -PE -sn MACHINE_IP/24</code> |<br>
+|<br>
+- |<br>
+| ICMP Timestamp Scan |<br>
+| <code>sudo nmap -PP -sn MACHINE_IP/24</code> |<br>
+|<br>
+- |<br>
+| ICMP Address Mask Scan |<br>
+| <code>sudo nmap -PM -sn MACHINE_IP/24</code> |<br>
+|<br>
+- |<br>
+| TCP SYN Ping Scan |<br>
+| <code>sudo nmap -PS22,80,443 -sn MACHINE_IP/30</code> |<br>
+|<br>
+- |<br>
+| TCP ACK Ping Scan |<br>
+| <code>sudo nmap -PA22,80,443 -sn MACHINE_IP/30</code> |<br>
+|<br>
+- |<br>
+| UDP Ping Scan |<br>
+| <code>sudo nmap -PU53,161,162 -sn MACHINE_IP/30</code> |<br>
+- |<br>
+| Scan Type |<br>
+| Example Command |<br>
+|<br>
+| ---- |<br>
+- |<br>
+| ARP Scan |<br>
+| <code>sudo nmap -PR -sn MACHINE_IP/24</code> |<br>
+|<br>
+- |<br>
+| ICMP Echo Scan |<br>
+| <code>sudo nmap -PE -sn MACHINE_IP/24</code> |<br>
+|<br>
+- |<br>
+| ICMP Timestamp Scan |<br>
+| <code>sudo nmap -PP -sn MACHINE_IP/24</code> |<br>
+|<br>
+- |<br>
+| ICMP Address Mask Scan |<br>
+| <code>sudo nmap -PM -sn MACHINE_IP/24</code> |<br>
+|<br>
+- |<br>
+| TCP SYN Ping Scan |<br>
+| <code>sudo nmap -PS22,80,443 -sn MACHINE_IP/30</code> |<br>
+|<br>
+- |<br>
+| TCP ACK Ping Scan |<br>
+| <code>sudo nmap -PA22,80,443 -sn MACHINE_IP/30</code> |<br>
+|<br>
+- |<br>
+| UDP Ping Scan |<br>
+| <code>sudo nmap -PU53,161,162 -sn MACHINE_IP/30</code> |<br>
+- Use <code>nmap -sn TARGETS</code> to discover online hosts without port-scanning<br>
+- Use <code>nmap -PR -sn TARGET/24</code> to perform an ARP scan of all hosts in a subnet without port-scanning.<br>
+- | Option | Purpose                        |<br>
+|--------|--------------------------------|<br>
+| <code>-n</code>   | No DNS lookup                  |<br>
+| <code>-R</code>   | Reverse-DNS lookup for all hosts |<br>
+| <code>-sn</code>  | Host discovery only            |</p></div><div class="el-h1"><h1 data-heading="Basic Port Scans" dir="auto" class="heading" id="Basic_Port_Scans_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>Basic Port Scans</h1></div><div class="el-h2"><h2 data-heading="TCP and UDP Ports" dir="auto" class="heading" id="TCP_and_UDP_Ports_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>TCP and UDP Ports</h2></div><div class="el-p"><p dir="auto">TCP port or UDP port is used to identify a network service running on that host. A server provides the network service, and it adheres to a specific network protocol.</p></div><div class="el-p"><p dir="auto">A port might be open, but a firewall might be blocking the packets. Therefore, Nmap considers the following six states:</p></div><div class="el-ul"><ul class="has-list-bullet">
+<li data-line="0" dir="auto"><span class="list-bullet"></span><strong>Open</strong>: indicates that a service is listening on the specified port.</li>
+<li data-line="1" dir="auto"><span class="list-bullet"></span><strong>Closed</strong>: indicates that no service is listening on the specified port, although the port is accessible. By accessible, we mean that it is reachable and is not blocked by a firewall or other security appliances/programs.</li>
+<li data-line="2" dir="auto"><span class="list-bullet"></span><strong>Filtered</strong>: means that Nmap cannot determine if the port is open or closed because the port is not accessible. This state is usually due to a firewall preventing Nmap from reaching that port. Nmap’s packets may be blocked from reaching the port; alternatively, the responses are blocked from reaching Nmap’s host.</li>
+<li data-line="3" dir="auto"><span class="list-bullet"></span><strong>Unfiltered</strong>: means that Nmap cannot determine if the port is open or closed, although the port is accessible. This state is encountered when using an ACK scan <code>-sA</code>.</li>
+<li data-line="4" dir="auto"><span class="list-bullet"></span><strong>Open|Filtered</strong>: This means that Nmap cannot determine whether the port is open or filtered.</li>
+<li data-line="5" dir="auto"><span class="list-bullet"></span><strong>Closed|Filtered</strong>: This means that Nmap cannot decide whether a port is closed or filtered.</li>
+</ul></div><div class="el-h2"><h2 data-heading="TCP Flags" dir="auto" class="heading" id="TCP_Flags_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>TCP Flags</h2></div><div class="el-h3"><h3 data-heading="TCP Header" dir="auto" class="heading" id="TCP_Header_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>TCP Header</h3></div><div class="el-p"><p dir="auto">is the first 24 bytes of a TCP segment. The following figure shows the TCP header as defined in RFC 793.<br>
+<img src="https://tryhackme-images.s3.amazonaws.com/user-uploads/5f04259cf9bf5b57aed2c476/room-content/79ca8e4acbd573a27cee413cde927769.png" referrerpolicy="no-referrer" target="_self" class="is-unresolved"></p></div><div class="el-ul"><ul class="has-list-bullet">
+<li data-line="0" dir="auto"><span class="list-bullet"></span>In the first row, we have the source TCP port number and the destination port number. We can see that the port number is allocated 16 bits (2 bytes). In the second and third rows, we have the sequence number and the acknowledgement number. Each row has 32 bits(4 bytes) allocated, with six rows total, making up 24 bytes.<br>
+- <strong>TCP Header Flags</strong><br>
+- <strong>URG</strong>: Urgent flag indicates that the urgent pointer filed<br>
+is significant. The urgent pointer indicates that the incoming data is<br>
+urgent, and that a TCP segment with the URG flag set is processed immediately without consideration of having to wait on previously sent TCP segments.<br>
+- <strong>ACK</strong>: Acknowledgement flag indicates that the acknowledgement number is significant. It is used to acknowledge the receipt of a TCP segment.<br>
+- <strong>PSH</strong>: Push flag asking TCP to pass the data to the application promptly.<br>
+- <strong>RST</strong>: Reset flag is used to reset the connection. Another device, such as a firewall, might send it to tear a TCP<br>
+connection. This flag is also used when data is sent to a host and there is no service on the receiving end to answer.<br>
+- <strong>SYN</strong>: Synchronize flag is used to initiate a TCP 3-way handshake and synchronize sequence numbers with the other<br>
+host. The sequence number should be set randomly during TCP connection establishment.<br>
+- <strong>FIN</strong>: The sender has no more data to send.</li>
+</ul></div><div class="el-h2"><h2 data-heading="TCP Connect Scan" dir="auto" class="heading" id="TCP_Connect_Scan_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>TCP Connect Scan</h2></div><div class="el-p"><p dir="auto">It works by completing the TCP 3-way handshake. In standard TCP connection establishment, the client sends a TCP packet with SYN flag set, and the server responds with SYN/ACK if the port is open; finally, the client completes the 3-way handshake by  sending an ACK.<br>
+- We are interested in learning whether the TCP port is open, not establishing a TCP connection. Hence the connection is torn as soon as its state is confirmed by sending a RST/ACK. You can choose to run TCP connect scan using <code>-sT</code>.<br>
+- ## TCP SYN Scan<br>
+collapsed:: true<br>
+- Unprivileged users are limited to connect scan. However, the default scan mode is SYN scan, and it requires a privileged user to run it. SYN scan does not need to complete the TCP 3-way handshake; instead, it tears down the connection once it receives a response from the server, this decreases the chances of the scan being logged. We can select this scan type by using the <code>-sS</code> option.<br>
+- TCP SYN scan is the default scan mode when running Nmap as a privileged user, running as root or using sudo, and it is a very reliable choice.<br>
+- ## UDP Scan<br>
+collapsed:: true<br>
+- UDP is a connectionless protocol, and hence it does not require any handshake for connection establishment. We cannot guarantee that a service listening on a UDP port would respond to our packets. However, if a UDP packet is sent to a closed port, an ICMP port unreachable error (type 3, code 3) is returned. You can select UDP scan using the <code>-sU</code> option; moreover, you can combine it with another TCP scan.<br>
+- ## Fine-Tunning Scope and Performance<br>
+collapsed:: true<br>
+- ### Specifying ports<br>
+- port list: <code>-p22,80,443</code> will scan ports 22, 80 and 443.<br>
+- port range: <code>-p1-1023</code> will scan all ports between 1 and 1023 inclusive<br>
+- ### Scan Timing<br>
+- You can control the scan timing using <code>-T&lt;0-5&gt;</code>.<br>
+- paranoid (0)<br>
+- sneaky (1)<br>
+- polite (2)<br>
+- normal (3)<br>
+- aggressive (4)<br>
+- insane (5)<br>
+- To avoid IDS alerts, you might consider <code>-T0</code> or <code>-T1</code>. For instance, <code>-T0</code> scans one port at a time and waits 5 minutes between sending each probe. If you don’t specify any timing, Nmap uses normal <code>-T3</code>. Note that <code>-T5</code> can affect the accuracy of the scan results due to the increased likelihood of packet loss.&nbsp;Note that <code>-T4</code> is often used during CTFs and when learning to scan on practice targets, whereas <code>-T1</code> is often used during real engagements where stealth is more important.<br>
+- Alternatively, you can choose to control the packet rate using <code>--min-rate &lt;number&gt;</code> and <code>--max-rate &lt;number&gt;</code>. For example, <code>--max-rate 10</code> or <code>--max-rate=10</code>ensures that your scanner is not sending more than ten packets per second.<br>
+- Moreover, you can control probing parallelization using <code>--min-parallelism &lt;numprobes&gt;</code> and <code>--max-parallelism &lt;numprobes&gt;</code>. Nmap probes the targets to discover which hosts are live and which ports are open; probing parallelization specifies the number of such probes that can be run in parallel. For instance, <code>--min-parallelism=512</code> pushes Nmap to maintain at least 512 probes in parallel; these 512 probes are related to host discovery and open ports.<br>
+- | Port Scan Type     | Example Command                     |<br>
+|--------------------|-------------------------------------|<br>
+| TCP Connect Scan   | nmap -sT 10.10.29.156               |<br>
+| TCP SYN Scan       | sudo nmap -sS 10.10.29.156          |<br>
+| UDP Scan           | sudo nmap -sU 10.10.29.156          |<br>
+- | Option                 | Purpose                                      |<br>
+|------------------------|----------------------------------------------|<br>
+| -p-                    | all ports                                    |<br>
+| -p1-1023               | scan ports 1 to 1023                         |<br>
+| -F                     | 100 most common ports                        |<br>
+| -r                     | scan ports in consecutive order              |<br>
+| -T&lt;0-5&gt;                | -T0 being the slowest and T5 the fastest     |<br>
+| --max-rate 50          | rate ≤ 50 packets/sec                        |<br>
+| --min-rate 15          | rate ≥ 15 packets/sec                        |<br>
+| --min-parallelism 100  | at least 100 probes in parallel              |</p></div><div class="el-ul"><ul class="has-list-bullet">
+<li data-line="0" dir="auto"><span class="list-bullet"></span><span class="list-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>
+<h1 data-heading="Advanced Port Scan" dir="auto" class="heading" id="Advanced_Port_Scan_0">Advanced Port Scan</h1>
+<ul class="has-list-bullet">
+<li data-line="1" dir="auto"><span class="list-bullet"></span>
+<table>
+<thead>
+<tr>
+<th>Port Scan Type</th>
+<th>Example Command</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TCP Null Scan</td>
+<td><code>sudo nmap -sN 10.10.173.128</code></td>
+</tr>
+<tr>
+<td>TCP FIN Scan</td>
+<td><code>sudo nmap -sF 10.10.173.128</code></td>
+</tr>
+<tr>
+<td>TCP Xmas Scan</td>
+<td><code>sudo nmap -sX 10.10.173.128</code></td>
+</tr>
+<tr>
+<td>TCP Maimon Scan</td>
+<td><code>sudo nmap -sM 10.10.173.128</code></td>
+</tr>
+<tr>
+<td>TCP ACK Scan</td>
+<td><code>sudo nmap -sA 10.10.173.128</code></td>
+</tr>
+<tr>
+<td>TCP Window Scan</td>
+<td><code>sudo nmap -sW 10.10.173.128</code></td>
+</tr>
+<tr>
+<td>Custom TCP Scan</td>
+<td><code>sudo nmap --scanflags URGACKPSHRSTSYNFIN 10.10.173.128</code></td>
+</tr>
+<tr>
+<td>Spoofed Source IP</td>
+<td><code>sudo nmap -S SPOOFED_IP 10.10.173.128</code></td>
+</tr>
+<tr>
+<td>Spoofed MAC Address</td>
+<td><code>--spoof-mac SPOOFED_MAC</code></td>
+</tr>
+<tr>
+<td>Decoy Scan</td>
+<td><code>nmap -D DECOY_IP,ME 10.10.173.128</code></td>
+</tr>
+<tr>
+<td>Idle (Zombie) Scan</td>
+<td><code>sudo nmap -sI ZOMBIE_IP 10.10.173.128</code></td>
+</tr>
+<tr>
+<td>Fragment IP data into 8 bytes</td>
+<td><code>-f</code></td>
+</tr>
+<tr>
+<td>Fragment IP data into 16 bytes</td>
+<td><code>-ff</code></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--source-port PORT_NUM</code></td>
+<td>specify source port number</td>
+</tr>
+<tr>
+<td><code>--data-lenght NUM</code></td>
+<td>append random data to reach given length</td>
+</tr>
+</tbody>
+</table>
+<hr>
+| Option | Purpose |<br>
+| <code>--reason</code> | explain how Nmap made its conclusion |<br>
+| <code>-v</code> | verbose |<br>
+| <code>-vv</code> | very verbose |<br>
+| <code>-d</code> | debugging |<br>
+| <code>-dd</code> | more details for debugging |</li>
+<li data-line="28" dir="auto"><span class="list-bullet"></span><span class="list-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>
+<h2 data-heading="Introduction" dir="auto" class="heading" id="Introduction_0">Introduction</h2>
+collapsed:: true
+<ul class="has-list-bullet">
+<li data-line="30" dir="auto"><span class="list-bullet"></span>An ACK flag is set when you want to acknowledge received data. An ACK scan is like trying to acknowledge data that was neither sent nor received in the first place. Consider this simple analogy, someone coming to you out of nowhere to tell you, “yes, I hear you, please continue.” when you haven’t said anything.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul></div><div class="el-h2"><h2 data-heading="TCP Null Scan" dir="auto" class="heading" id="TCP_Null_Scan_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>TCP Null Scan</h2></div><div class="el-p"><p dir="auto">Does not set any flag; all six flag bits are set to zero. You can choose this scan using the <code>-sN</code> option. A TCP packet with no flags set will not trigger any response when it reaches an open port, as shown in the figure below. Therefore, from Nmap’s perspective, a lack of reply in a null scan indicates that either the port is open or a firewall is blocking the packet.</p></div><div class="el-p"><p dir="auto">However, we expect the target server to respond with an RST packet if the port is closed. Consequently, we can use the lack of RST response to figure out the ports that are not closed: open or filtered.</p></div><div class="el-h2"><h2 data-heading="FIN Scan" dir="auto" class="heading" id="FIN_Scan_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>FIN Scan</h2></div><div class="el-p"><p dir="auto">The FIN scan sends a TCP packet with the FIN flag set. You can choose this scan type using the <code>-sF</code> option. Similarly, no response will be sent if the TCP port is open. Again, Nmap cannot be sure if the port is open or if a firewall is blocking the traffic related to this TCP port.</p></div><div class="el-p"><p dir="auto">However, the target system should respond with an RST if the port is closed. Consequently, we will be able to know which ports are closed and use this knowledge to infer the ports that are open or filtered. It's worth noting some firewalls will 'silently' drop the traffic without sending an RST.</p></div><div class="el-h2"><h2 data-heading="Xmas Scan" dir="auto" class="heading" id="Xmas_Scan_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>Xmas Scan</h2></div><div class="el-p"><p dir="auto">The Xmas scan gets its name after Christmas tree lights. An Xmas scan sets the FIN, PSH, and URG flags simultaneously. You can select Xmas scan with the option <code>-sX</code>.</p></div><div class="el-p"><p dir="auto">Like the Null scan and FIN scan, if an RST packet is received, it means that the port is closed. Otherwise, it will be reported as open|filtered.</p></div><div class="el-p"><p dir="auto">One scenario where these three scan types can be efficient is when scanning a target behind a stateless (non-stateful) firewall. A stateless firewall will check if the incoming packet has the SYN flag set to detect a connection attempt. Using a flag combination that does not match the SYN packet makes it possible to deceive the firewall and reach the system behind it. However, a stateful firewall will practically block all such crafted packets and render this kind of scan useless.</p></div><div class="el-h2"><h2 data-heading="TCP Maimon Scan" dir="auto" class="heading" id="TCP_Maimon_Scan_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>TCP Maimon Scan</h2></div><div class="el-p"><p dir="auto">Although it isn't common to work in modern networks, in this scan, the FIN and ACK bits are set. The target should send an RST packet as a response. However, certain BSD-derived systems drop the packet if it is an open port exposing the open ports. Use <code>-sM</code> option</p></div><div class="el-p"><p dir="auto">Most target systems respond with an RST packet regardless of whether the TCP port is open. In such a case, we won’t be able to discover the open ports. The figure below shows the expected behaviour in the cases of both open and closed TCP ports.<br>
+<span alt="image.png" src="assets/image_1747451864202_0.png" class="internal-embed media-embed image-embed is-loaded" target="_self"><img alt="image.png" src="assets/image_1747451864202_0.png" target="_self"></span>	</p></div><div class="el-h2"><h2 data-heading="TCP ACK Scan" dir="auto" class="heading" id="TCP_ACK_Scan_0"><span class="heading-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>TCP ACK Scan</h2></div><div class="el-p"><p dir="auto">An ACK scan will send a TCP packet with the ACK flag set. Use the <code>-sA</code> option to choose this scan. the target would respond to the ACK with RST regardless of the state of the port. This behaviour happens because a TCP packet with the ACK flag set should be sent only in response to a received TCP packet to acknowledge the receipt of some data, unlike our case. Hence, this scan won’t tell us whether the target port is open in a simple setup.<br>
+- This kind of scan would be helpful if there is a firewall in front of the target. Consequently, based on which ACK packets resulted in responses, you will learn which ports were not blocked by the firewall. In other words, this type of scan is more suitable to discover firewall rule sets and configuration.<br>
+- ### TCP Window Scan<br>
+- The TCP window scan is almost the same as the ACK scan; however, it examines the TCP Window field of the RST packets returned. On specific systems, this can reveal that the port is open. You can select this scan type with the option <code>-sW</code>. As shown in the figure below, we expect to get an RST packet in reply to our “uninvited” ACK packets, regardless of whether the port is open or closed.<br>
+- if we repeat our TCP window scan against a server behind a firewall, we expect to get more satisfying results. In the console output shown below, the TCP window scan pointed that three ports are detected as closed. (This is in contrast with the ACK scan that labelled the same three ports as unfiltered.) Although we know that these three ports are not closed, we realize they responded differently, indicating that the firewall does not block them.<br>
+- ### Custom Scan<br>
+- If you want to experiment with a new TCP flag combination beyond the built-in TCP scan types, you can do so using <code>--scanflags 			    </code>. For instance, if you want to set SYN, RST, and FIN simultaneously, you can do so using <code>--scanflags RSTSYNFIN 			    </code>. As shown in the figure below, if you develop your custom<br>
+scan, you need to know how the different ports will behave to interpret<br>
+the results in different scenarios correctly.<br>
+- Finally, it is essential to note that the ACK scan and the window scan were very efficient at helping us map out the firewall rules. However, it is vital to remember that just because a firewall is not blocking a specific port, it does not necessarily mean that a service is listening on that port. For example, there is a possibility that the firewall rules need to be updated to reflect recent service changes. Hence, ACK and window scans are exposing the firewall rules, not the services.<br>
+- ## Spoofing and Decoys<br>
+collapsed:: true<br>
+- In some network setups, you will be able to scan a target system using a spoofed IP address and even a spoofed MAC address. Such a scan is only beneficial in a situation where you can guarantee to capture the response. If you try to scan a target from some random network using a spoofed IP address, chances are you won’t have any response routed to you, and the scan results could be unreliable.<br>
+- The following figure shows the attacker launching the command <code>nmap -S SPOOFED_IP MACHINE_IP</code>.Consequently, Nmap will craft all the packets using the provided source IP address <code>SPOOFED_IP</code>. The target machine will respond to the incoming packets sending the replies to the destination IP address <code>SPOOFED_IP</code>. For this scan to work and give accurate results, the attacker needs to monitor the network traffic to analyze the replies.<br>
+- In brief, scanning with a spoofed IP address is three steps:<br>
+- Attacker sends a packet with a spoofed source IP address to the target machine.<br>
+- Target machine replies to the spoofed IP address as the destination.<br>
+- Attacker captures the replies to figure out open ports.<br>
+- In general, you expect to specify the network interface using <code>-e</code> and to explicitly disable ping scan <code>-Pn</code>. Therefore, instead of <code>nmap -S SPOOFED_IP MACHINE_IP</code>, you will need to issue <code>nmap -e NET_INTERFACE -Pn -S SPOOFED_IP MACHINE_IP</code> to tell Nmap explicitly which network interface to use and not to expect to receive a ping reply. It is worth repeating that this scan will be useless if the attacker system cannot monitor the network for responses.<br>
+- When you are on the same subnet as the target machine, you would be able to <strong>spoof your MAC address</strong> as well. You can specify the source MAC address using <code>--spoof-mac SPOOFED_MAC</code>. This address spoofing is only possible if the attacker and the target machine are on the same Ethernet (802.3) network or same WiFi (802.11).<br>
+- Spoofing only works in a minimal number of cases where certain conditions are met. Therefore, the attacker might resort to using decoys to make it more challenging to be pinpointed. The concept is simple, make the scan appear to be coming from many IP addresses so that the attacker’s IP address would be lost among them. As we see in the figure below, the scan of the target machine will appear to be coming from 3 different sources, and consequently, the replies will go the decoys as well.<br>
+- <span alt="image.png" src="assets/image_1747464817263_0.png" class="internal-embed media-embed image-embed is-loaded" target="_self"><img alt="image.png" src="assets/image_1747464817263_0.png" target="_self"></span>{:height 387, :width 363}<br>
+- You can launch a decoy scan by specifying a specific or random IP address after <code>-D</code>. For example, <code>nmap -D 10.10.0.1,10.10.0.2,ME MACHINE_IP</code> will make the scan of MACHINE_IP appear as coming from the IP addresses 10.10.0.1, 10.10.0.2, and then <code>ME</code> to indicate that your IP address should appear in the third order. Another example command would be <code>nmap -D 10.10.0.1,10.10.0.2,RND,RND,ME MACHINE_IP</code>, where the third and fourth source IP addresses are assigned randomly, while the fifth source is going to be the attacker’s IP address. In other words, each time you execute the latter command, you would expect two new random IP addresses to be the third and fourth decoy sources.<br>
+- ## Fragmented Packets<br>
+collapsed:: true<br>
+- ### Firewall<br>
+- Piece of software or hardware that permits packets to pass through or blocks them. It functions based on firewall rules, summarized as blocking all traffic with exceptions or allowing all traffic with exceptions. For instance, you might block all traffic to your server except those coming to your web server. A traditional firewall inspects, at least, the IP header and the transport layer header. A more sophisticated firewall would also try to examine the data carried by the transport layer.<br>
+- ### IDS<br>
+- Intrusion Detection System, inspects network packets for select behavioural patterns or specific content signatures. It raises an alert whenever a malicious rule is met. In addition to the IP header and transport layer header, an IDS would inspect the data contents in the transport layer and check if it matches any malicious patterns. How can you make it less likely for a traditional firewall/IDS to detect your Nmap activity? It is not easy to answer this; however, depending on the type of firewall/IDS, you might benefit from dividing the packet into smaller packets.<br>
+- ### Fragmented Packets<br>
+- Nmap provides the option <code>-f</code> to fragment packets. Once chosen, the IP data will be divided into 8 bytes or less. Adding another <code>-f</code> (<code>-f -f</code> or <code>-ff</code>) will split the data into 16 byte-fragments instead of 8. You can change the default value by using the <code>--mtu</code>; however, you should always choose a multiple of 8.<br>
+- The data that we will fragment across multiple packets is highlighted in red. To aid in the reassembly on the recipient side, IP uses the identification (ID) and fragment offset, shown on the second row of the figure below.<br>
+- if you prefer to increase the size of your packets to make them look innocuous, you can use the option <code>--data-length NUM</code>, where num specifies the number of bytes you want to append to your packets.<br>
+- ## Idle/Zombie Scan<br>
+collapsed:: true<br>
+- Zombie scan requires an idle system connected to the network that you can communicate with, nmap will make each probe appear as if coming from the idle(zombie) host, then it will check for indicators whether the idle (zombie) host received any response to the spoofed probe.<br>
+This is accomplished by checking the IP identification (IP ID) value in the IP header. You can run an idle scan using <code>nmap -sI ZOMBIE_IP MACHINE_IP</code>, where <code>ZOMBIE_IP</code> is the IP address of the idle host (zombie).<br>
+- The idle (zombie) scan requires the following three steps to discover whether a port is open:<br>
+- Trigger the idle host to respond so that you can record the current IP ID on the idle host.<br>
+- Send a SYN packet to a TCP port on the target. The packet should be spoofed to appear as if it was coming from the idle host (zombie) IP address.<br>
+- Trigger the idle machine again to respond so that you can compare the new IP ID with the one received earlier.<br>
+- If the “idle host” is busy, all the returned IP IDs would be useless.<br>
+- Add <code>--reason</code> if you want more details regarding its reasoning and conclusions.<br>
+- You also can use <code>-v</code> for verbose output or <code>-vv</code> for even more verbosity<br>
+- You also can use <code>-d</code> for debugging details or <code>-dd</code> for even more details.</p></div><div class="el-ul"><ul class="has-list-bullet">
+<li data-line="0" dir="auto"><span class="list-bullet"></span><span class="list-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>
+<h1 data-heading="Post Port Scans" dir="auto" class="heading" id="Post_Port_Scans_0">Post Port Scans</h1>
+<ul class="has-list-bullet">
+<li data-line="1" dir="auto"><span class="list-bullet"></span>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-sV</code></td>
+<td>Determine service/version info on open ports</td>
+</tr>
+<tr>
+<td><code>-sV --version-light</code></td>
+<td>Try the most likely probes (2)</td>
+</tr>
+<tr>
+<td><code>-sV --version-all</code></td>
+<td>Try all available probes (9)</td>
+</tr>
+<tr>
+<td><code>-O</code></td>
+<td>Detect OS</td>
+</tr>
+<tr>
+<td><code>--traceroute</code></td>
+<td>Run traceroute to target</td>
+</tr>
+<tr>
+<td><code>--script=SCRIPTS</code></td>
+<td>Nmap scripts to run</td>
+</tr>
+<tr>
+<td><code>-sC</code> or <code>--script=default</code></td>
+<td>Run default scripts</td>
+</tr>
+<tr>
+<td><code>-A</code></td>
+<td>Equivalent to <code>-sV -O -sC --traceroute</code></td>
+</tr>
+<tr>
+<td><code>-oN</code></td>
+<td>Save output in normal format</td>
+</tr>
+<tr>
+<td><code>-oG</code></td>
+<td>Save output in grepable format</td>
+</tr>
+<tr>
+<td><code>-oX</code></td>
+<td>Save output in XML format</td>
+</tr>
+<tr>
+<td><code>-oA</code></td>
+<td>Save output in normal, XML and grepable formats</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li data-line="15" dir="auto"><span class="list-bullet"></span><span class="list-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>
+<h2 data-heading="Service Detection" dir="auto" class="heading" id="Service_Detection_0">Service Detection</h2>
+<ul class="has-list-bullet">
+<li data-line="16" dir="auto"><span class="list-bullet"></span>Adding <code>-sV</code> will collect and determine service and version information for the open ports. You can control the intensity with <code>--version-INTENSITYLEVEL</code> where the level ranges between 0, the lightest, and 9, the most complete.  <code>-sV --version-light</code> has an intensity of 2, while <code>-sV --version-all</code> has an intensity of 9.</li>
+<li data-line="17" dir="auto"><span class="list-bullet"></span><strong>Important</strong> to note that using <code>-sV</code> will <strong>force Nmap to proceed with TCP 3-way handshake</strong> and establish the connection.<br>
+Nmap cannot discover the version without establishing a connection fully and communicating with the listening service. In other words, <strong>stealth SYN scan <code>-sS</code> is not possible when <code>-sV</code> option is chosen.</strong></li>
+<li data-line="19" dir="auto"><span class="list-bullet"></span>unlike the <em>service</em> column, the <em>version</em> column is not a guess.</li>
+</ul>
+</li>
+<li data-line="20" dir="auto"><span class="list-bullet"></span><span class="list-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>
+<h2 data-heading="OS Detection" dir="auto" class="heading" id="OS_Detection_0">OS Detection</h2>
+<ul class="has-list-bullet">
+<li data-line="21" dir="auto"><span class="list-bullet"></span>Nmap can detect the Operating System (OS) based on its behaviour and any telltale signs in its responses. OS detection can be enabled using <code>-O</code>; this is an <em>uppercase O</em> as in OS.</li>
+<li data-line="22" dir="auto"><span class="list-bullet"></span>Nmap commonly detect the OS correctly, but often fails scanning the kernel version.</li>
+<li data-line="23" dir="auto"><span class="list-bullet"></span>The guest OS fingerprints might get distorted due to the rising use of virtualization and similar technologies. Therefore, <strong>always take the OS version with a grain of salt.</strong></li>
+</ul>
+</li>
+<li data-line="24" dir="auto"><span class="list-bullet"></span><span class="list-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>
+<h2 data-heading="Traceroute" dir="auto" class="heading" id="Traceroute_0">Traceroute</h2>
+<ul class="has-list-bullet">
+<li data-line="25" dir="auto"><span class="list-bullet"></span>If you want Nmap to find the routers between you and the target, just add <code>--traceroute</code>. In the following example, Nmap appended a traceroute to its scan results.</li>
+<li data-line="26" dir="auto"><span class="list-bullet"></span>Standard <code>traceroute</code> starts with a packet of low TTL (Time to Live) and keeps increasing until it reaches the target. Nmap’s traceroute starts with a packet of high TTL and keeps decreasing it.</li>
+<li data-line="27" dir="auto"><span class="list-bullet"></span>many routers are configured not to send ICMP Time-to-Live exceeded, which would prevent us from discovering their IP addresses.</li>
+<li data-line="28" dir="auto"><span class="list-bullet"></span><strong>Nmap traceroute often is stealthy than traditional traceroute.</strong></li>
+</ul>
+</li>
+<li data-line="29" dir="auto"><span class="list-bullet"></span><span class="list-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>
+<h2 data-heading="Nmap Scripting Engine (NSE)" dir="auto" class="heading" id="Nmap_Scripting_Engine_(NSE)_0">Nmap Scripting Engine (NSE)</h2>
+<ul class="has-list-bullet">
+<li data-line="30" dir="auto"><span class="list-bullet"></span>
+<p>A script is a piece of code that does not need to be compiled. In other words, it remains in its original human-readable form and does not need to be converted to machine language.<br>
+Nmap provides support for scripts using the Lua language.</p>
+</li>
+<li data-line="32" dir="auto"><span class="list-bullet"></span>
+<p>There are some scripts, you can choose them using <code>--script=default</code> or simply adding <code>-sC</code>In default, categories include:</p>
+<table>
+<thead>
+<tr>
+<th>Script Category</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>auth</td>
+<td>Authentication related scripts</td>
+</tr>
+<tr>
+<td>broadcast</td>
+<td>Discover hosts by sending broadcast messages</td>
+</tr>
+<tr>
+<td>brute</td>
+<td>Performs brute-force password auditing against logins</td>
+</tr>
+<tr>
+<td>default</td>
+<td>Default scripts, same as -sC</td>
+</tr>
+<tr>
+<td>discovery</td>
+<td>Retrieve accessible information, such as database tables and DNS names</td>
+</tr>
+<tr>
+<td>dos</td>
+<td>Detects servers vulnerable to Denial of Service (DoS)</td>
+</tr>
+<tr>
+<td>exploit</td>
+<td>Attempts to exploit various vulnerable services</td>
+</tr>
+<tr>
+<td>external</td>
+<td>Checks using a third-party service, such as Geoplugin and Virustotal</td>
+</tr>
+<tr>
+<td>fuzzer</td>
+<td>Launch fuzzing attacks</td>
+</tr>
+<tr>
+<td>intrusive</td>
+<td>Intrusive scripts such as brute-force attacks and exploitation</td>
+</tr>
+<tr>
+<td>malware</td>
+<td>Scans for backdoors</td>
+</tr>
+<tr>
+<td>safe</td>
+<td>Safe scripts that won’t crash the target</td>
+</tr>
+<tr>
+<td>version</td>
+<td>Retrieve service versions</td>
+</tr>
+<tr>
+<td>vuln</td>
+<td>Checks for vulnerabilities or exploit vulnerable services</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li data-line="50" dir="auto"><span class="list-bullet"></span>
+<p>You can also specify the script by name using <code>--script "SCRIPT-NAME"</code> or a pattern such as <code>--script "ftp*"</code>, which would include <code>ftp-brute</code>.</p>
+</li>
+<li data-line="51" dir="auto"><span class="list-bullet"></span>
+<p>You have to be careful as some scripts are pretty intrusive. Moreover, some scripts might be for a specific server and, if chosen at random, will waste your time with no benefit.</p>
+</li>
+</ul>
+</li>
+<li data-line="52" dir="auto"><span class="list-bullet"></span><span class="list-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>
+<h2 data-heading="Saving the Output" dir="auto" class="heading" id="Saving_the_Output_0">Saving the Output</h2>
+<ul class="has-list-bullet">
+<li data-line="53" dir="auto"><span class="list-bullet"></span><span class="list-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>When you tun an nmap scan, the three main formats are:
+<ul class="has-list-bullet">
+<li data-line="54" dir="auto"><span class="list-bullet"></span>Normal<br>
+logseq.order-list-type:: number</li>
+<li data-line="56" dir="auto"><span class="list-bullet"></span>Grepable<br>
+logseq.order-list-type:: number</li>
+<li data-line="58" dir="auto"><span class="list-bullet"></span>XML<br>
+logseq.order-list-type:: number</li>
+<li data-line="60" dir="auto"><span class="list-bullet"></span>Script Kiddie<br>
+logseq.order-list-type:: number</li>
+</ul>
+</li>
+<li data-line="62" dir="auto"><span class="list-bullet"></span><span class="list-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>
+<h3 data-heading="Normal" dir="auto" class="heading" id="Normal_0">Normal</h3>
+<ul class="has-list-bullet">
+<li data-line="63" dir="auto"><span class="list-bullet"></span>similar to the output you get on the screen when scanning a target. You can save your scan in normal format by using <code>-oN FILENAME</code>; N stands for normal.</li>
+</ul>
+</li>
+<li data-line="64" dir="auto"><span class="list-bullet"></span><span class="list-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>
+<h3 data-heading="Grepable" dir="auto" class="heading" id="Grepable_0">Grepable</h3>
+<ul class="has-list-bullet">
+<li data-line="65" dir="auto"><span class="list-bullet"></span>It makes filtering the scan output for specific keywords or terms efficient. You can save the scan result in grepable format using <code>-oG FILENAME</code>.</li>
+<li data-line="66" dir="auto"><span class="list-bullet"></span>The main reason is that Nmap wants to make each line meaningful and complete when the user applies <code>grep</code>. As a result, in grepable output, the lines are so long and are not convenient to read compared to normal output.</li>
+</ul>
+</li>
+<li data-line="67" dir="auto"><span class="list-bullet"></span><span class="list-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>
+<h3 data-heading="XML" dir="auto" class="heading" id="XML_0">XML</h3>
+<ul class="has-list-bullet">
+<li data-line="68" dir="auto"><span class="list-bullet"></span>You can save the scan results in XML format using <code>-oX FILENAME</code>. The XML format would be most convenient to process the output in other programs. Conveniently enough, you can save the scan output in all three formats using <code>-oA FILENAME</code> to combine <code>-oN</code>, <code>-oG</code>, and <code>-oX</code> for normal, grepable, and XML.</li>
+</ul>
+</li>
+<li data-line="69" dir="auto"><span class="list-bullet"></span><span class="list-collapse-indicator collapse-indicator collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></span>
+<h3 data-heading="Script Kiddie" dir="auto" class="heading" id="Script_Kiddie_0">Script Kiddie</h3>
+<ul class="has-list-bullet">
+<li data-line="70" dir="auto"><span class="list-bullet"></span>This format is useless if you want to search the output for any interesting keywords or keep the results for future reference. However, you can use it to save the output of the scan <code>nmap -sS 127.0.0.1 -oS FILENAME</code>, display the output filename, and look 31337 in front of friends who are not tech-savvy.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul></div><div class="footer"><div class="data-bar"></div></div></div></div></div><div id="right-content" class="leaf" style="--sidebar-width: var(--sidebar-width-right);"><div id="right-sidebar" class="sidebar"><div class="sidebar-handle"></div><div class="sidebar-topbar"><div class="topbar-content"><label class="theme-toggle-container" for="theme-toggle-input" id=""><input class="theme-toggle-input" type="checkbox" id="theme-toggle-input"><div class="toggle-background"></div></label></div><div class="clickable-icon sidebar-collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="svg-icon"><path d="M21 3H3C1.89543 3 1 3.89543 1 5V19C1 20.1046 1.89543 21 3 21H21C22.1046 21 23 20.1046 23 19V5C23 3.89543 22.1046 3 21 3Z"></path><path d="M10 4V20"></path><path d="M4 7H7"></path><path d="M4 10H7"></path><path d="M4 13H7"></path></svg></div></div><div class="sidebar-content-wrapper"><div id="right-sidebar-content" class="leaf-content"><div class="graph-view-wrapper"><div class="feature-header"><div class="feature-title">Interactive Graph</div></div><div class="graph-view-placeholder">
+		<div class="graph-view-container">
+			<div class="graph-icon graph-expand" role="button" aria-label="Expand" data-tooltip-position="top"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></div>
+			<div class="graph-icon graph-global" role="button" aria-label="Global Graph" data-tooltip-position="top"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-git-fork"><circle cx="12" cy="18" r="3"></circle><circle cx="6" cy="6" r="3"></circle><circle cx="18" cy="6" r="3"></circle><path d="M18 9v2c0 .6-.4 1-1 1H7c-.6 0-1-.4-1-1V9"></path><path d="M12 12v3"></path></svg></div>
+			<canvas id="graph-canvas" class="hide" width="512px" height="512px"></canvas>
+		</div>
+		</div></div><div id="outline" class=" tree-container"><div class="feature-header"><div class="feature-title">Table Of Contents</div><button class="clickable-icon nav-action-button tree-collapse-all" aria-label="Collapse All"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></svg></button></div><div class="tree-item" data-depth="1"><a class="tree-item-self is-clickable" href="Indexes/CyberSec/Tools/Nmap.html#Nmap_0" data-path="#Nmap_0"><div class="tree-item-inner heading-link" heading-name="Nmap">Nmap</div></a><div class="tree-item-children"></div></div><div class="tree-item mod-collapsible" data-depth="1"><a class="tree-item-self is-clickable mod-collapsible" href="Indexes/CyberSec/Tools/Nmap.html#Live_Host_Discovery_0" data-path="#Live_Host_Discovery_0"><div class="tree-item-icon collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div><div class="tree-item-inner heading-link" heading-name="Live Host Discovery">Live Host Discovery</div></a><div class="tree-item-children"><div class="tree-item" data-depth="2"><a class="tree-item-self is-clickable" href="Indexes/CyberSec/Tools/Nmap.html#Subnetworks_0" data-path="#Subnetworks_0"><div class="tree-item-inner heading-link" heading-name="Subnetworks">Subnetworks</div></a><div class="tree-item-children"></div></div></div></div><div class="tree-item mod-collapsible" data-depth="1"><a class="tree-item-self is-clickable mod-collapsible" href="Indexes/CyberSec/Tools/Nmap.html#Enumerating_targets_0" data-path="#Enumerating_targets_0"><div class="tree-item-icon collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div><div class="tree-item-inner heading-link" heading-name="Enumerating targets">Enumerating targets</div></a><div class="tree-item-children"><div class="tree-item" data-depth="2"><a class="tree-item-self is-clickable" href="Indexes/CyberSec/Tools/Nmap.html#Discovering_Live_Hosts_0" data-path="#Discovering_Live_Hosts_0"><div class="tree-item-inner heading-link" heading-name="Discovering Live Hosts">Discovering Live Hosts</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="2"><a class="tree-item-self is-clickable" href="Indexes/CyberSec/Tools/Nmap.html#Nmap_Host_Discovery_Using_ARP_0" data-path="#Nmap_Host_Discovery_Using_ARP_0"><div class="tree-item-inner heading-link" heading-name="Nmap Host Discovery Using ARP">Nmap Host Discovery Using ARP</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="2"><a class="tree-item-self is-clickable" href="Indexes/CyberSec/Tools/Nmap.html#Nmap_Host_Discovery_Using_ICMP_0" data-path="#Nmap_Host_Discovery_Using_ICMP_0"><div class="tree-item-inner heading-link" heading-name="Nmap Host Discovery Using ICMP">Nmap Host Discovery Using ICMP</div></a><div class="tree-item-children"></div></div><div class="tree-item mod-collapsible" data-depth="2"><a class="tree-item-self is-clickable mod-collapsible" href="Indexes/CyberSec/Tools/Nmap.html#Nmap_Host_Discovery_Using_TCP_and_UDP_0" data-path="#Nmap_Host_Discovery_Using_TCP_and_UDP_0"><div class="tree-item-icon collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div><div class="tree-item-inner heading-link" heading-name="Nmap Host Discovery Using TCP and UDP">Nmap Host Discovery Using TCP and UDP</div></a><div class="tree-item-children"><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="Indexes/CyberSec/Tools/Nmap.html#Ping_0" data-path="#Ping_0"><div class="tree-item-inner heading-link" heading-name="Ping">Ping</div></a><div class="tree-item-children"></div></div></div></div></div></div><div class="tree-item mod-collapsible" data-depth="1"><a class="tree-item-self is-clickable mod-collapsible" href="Indexes/CyberSec/Tools/Nmap.html#Basic_Port_Scans_0" data-path="#Basic_Port_Scans_0"><div class="tree-item-icon collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div><div class="tree-item-inner heading-link" heading-name="Basic Port Scans">Basic Port Scans</div></a><div class="tree-item-children"><div class="tree-item" data-depth="2"><a class="tree-item-self is-clickable" href="Indexes/CyberSec/Tools/Nmap.html#TCP_and_UDP_Ports_0" data-path="#TCP_and_UDP_Ports_0"><div class="tree-item-inner heading-link" heading-name="TCP and UDP Ports">TCP and UDP Ports</div></a><div class="tree-item-children"></div></div><div class="tree-item mod-collapsible" data-depth="2"><a class="tree-item-self is-clickable mod-collapsible" href="Indexes/CyberSec/Tools/Nmap.html#TCP_Flags_0" data-path="#TCP_Flags_0"><div class="tree-item-icon collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div><div class="tree-item-inner heading-link" heading-name="TCP Flags">TCP Flags</div></a><div class="tree-item-children"><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="Indexes/CyberSec/Tools/Nmap.html#TCP_Header_0" data-path="#TCP_Header_0"><div class="tree-item-inner heading-link" heading-name="TCP Header">TCP Header</div></a><div class="tree-item-children"></div></div></div></div><div class="tree-item" data-depth="2"><a class="tree-item-self is-clickable" href="Indexes/CyberSec/Tools/Nmap.html#TCP_Connect_Scan_0" data-path="#TCP_Connect_Scan_0"><div class="tree-item-inner heading-link" heading-name="TCP Connect Scan">TCP Connect Scan</div></a><div class="tree-item-children"></div></div></div></div><div class="tree-item mod-collapsible" data-depth="1"><a class="tree-item-self is-clickable mod-collapsible" href="Indexes/CyberSec/Tools/Nmap.html#Advanced_Port_Scan_0" data-path="#Advanced_Port_Scan_0"><div class="tree-item-icon collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div><div class="tree-item-inner heading-link" heading-name="Advanced Port Scan">Advanced Port Scan</div></a><div class="tree-item-children"><div class="tree-item" data-depth="2"><a class="tree-item-self is-clickable" href="Indexes/CyberSec/Tools/Nmap.html#Introduction_0" data-path="#Introduction_0"><div class="tree-item-inner heading-link" heading-name="Introduction">Introduction</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="2"><a class="tree-item-self is-clickable" href="Indexes/CyberSec/Tools/Nmap.html#TCP_Null_Scan_0" data-path="#TCP_Null_Scan_0"><div class="tree-item-inner heading-link" heading-name="TCP Null Scan">TCP Null Scan</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="2"><a class="tree-item-self is-clickable" href="Indexes/CyberSec/Tools/Nmap.html#FIN_Scan_0" data-path="#FIN_Scan_0"><div class="tree-item-inner heading-link" heading-name="FIN Scan">FIN Scan</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="2"><a class="tree-item-self is-clickable" href="Indexes/CyberSec/Tools/Nmap.html#Xmas_Scan_0" data-path="#Xmas_Scan_0"><div class="tree-item-inner heading-link" heading-name="Xmas Scan">Xmas Scan</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="2"><a class="tree-item-self is-clickable" href="Indexes/CyberSec/Tools/Nmap.html#TCP_Maimon_Scan_0" data-path="#TCP_Maimon_Scan_0"><div class="tree-item-inner heading-link" heading-name="TCP Maimon Scan">TCP Maimon Scan</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="2"><a class="tree-item-self is-clickable" href="Indexes/CyberSec/Tools/Nmap.html#TCP_ACK_Scan_0" data-path="#TCP_ACK_Scan_0"><div class="tree-item-inner heading-link" heading-name="TCP ACK Scan">TCP ACK Scan</div></a><div class="tree-item-children"></div></div></div></div><div class="tree-item mod-collapsible" data-depth="1"><a class="tree-item-self is-clickable mod-collapsible" href="Indexes/CyberSec/Tools/Nmap.html#Post_Port_Scans_0" data-path="#Post_Port_Scans_0"><div class="tree-item-icon collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div><div class="tree-item-inner heading-link" heading-name="Post Port Scans">Post Port Scans</div></a><div class="tree-item-children"><div class="tree-item" data-depth="2"><a class="tree-item-self is-clickable" href="Indexes/CyberSec/Tools/Nmap.html#Service_Detection_0" data-path="#Service_Detection_0"><div class="tree-item-inner heading-link" heading-name="Service Detection">Service Detection</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="2"><a class="tree-item-self is-clickable" href="Indexes/CyberSec/Tools/Nmap.html#OS_Detection_0" data-path="#OS_Detection_0"><div class="tree-item-inner heading-link" heading-name="OS Detection">OS Detection</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="2"><a class="tree-item-self is-clickable" href="Indexes/CyberSec/Tools/Nmap.html#Traceroute_0" data-path="#Traceroute_0"><div class="tree-item-inner heading-link" heading-name="Traceroute">Traceroute</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="2"><a class="tree-item-self is-clickable" href="Indexes/CyberSec/Tools/Nmap.html#Nmap_Scripting_Engine_(NSE)_0" data-path="#Nmap_Scripting_Engine_(NSE)_0"><div class="tree-item-inner heading-link" heading-name="Nmap Scripting Engine (NSE)">Nmap Scripting Engine (NSE)</div></a><div class="tree-item-children"></div></div><div class="tree-item mod-collapsible" data-depth="2"><a class="tree-item-self is-clickable mod-collapsible" href="Indexes/CyberSec/Tools/Nmap.html#Saving_the_Output_0" data-path="#Saving_the_Output_0"><div class="tree-item-icon collapse-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon right-triangle"><path d="M3 8L12 17L21 8"></path></svg></div><div class="tree-item-inner heading-link" heading-name="Saving the Output">Saving the Output</div></a><div class="tree-item-children"><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="Indexes/CyberSec/Tools/Nmap.html#Normal_0" data-path="#Normal_0"><div class="tree-item-inner heading-link" heading-name="Normal">Normal</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="Indexes/CyberSec/Tools/Nmap.html#Grepable_0" data-path="#Grepable_0"><div class="tree-item-inner heading-link" heading-name="Grepable">Grepable</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="Indexes/CyberSec/Tools/Nmap.html#XML_0" data-path="#XML_0"><div class="tree-item-inner heading-link" heading-name="XML">XML</div></a><div class="tree-item-children"></div></div><div class="tree-item" data-depth="3"><a class="tree-item-self is-clickable" href="Indexes/CyberSec/Tools/Nmap.html#Script_Kiddie_0" data-path="#Script_Kiddie_0"><div class="tree-item-inner heading-link" heading-name="Script Kiddie">Script Kiddie</div></a><div class="tree-item-children"></div></div></div></div></div></div></div></div></div><script defer="">let rs = document.querySelector("#right-sidebar"); rs.classList.toggle("is-collapsed", window.innerWidth < 768); rs.style.setProperty("--sidebar-width", localStorage.getItem("sidebar-right-width"));</script></div></div></div></div><div class="parsed-feature-container" style="display: contents;"><link itemprop="include" href="site-lib/html/custom-head-content-content.html"></div></body></html>
