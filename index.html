@@ -17,8 +17,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manufacturing+Consent&family=Orbitron:wght@400..900&family=Rubik+Glitch&family=UnifrakturMaguntia&display=swap" rel="stylesheet">
   
-  <script src="./site-lib/scripts/webpage.js"></script>
-
+  <script async id="webpage-script" src="site-lib/scripts/webpage.js"></script>
+  <script async id="graph-wasm-script" src="site-lib/scripts/graph-wasm.js"></script>
+  <script async id="graph-render-worker-script" src="site-lib/scripts/graph-render-worker.js"></script>
+  
   <style>
     /* Cuando el grafo esté expandido, que ocupe toda la pantalla */
     .graph-view-container.expanded {
@@ -54,53 +56,62 @@
   </style>
 
   <script>
-    // Espera a que ObsidianSite y el grafo estén listos
-    function waitForGraph(callback, attempts = 0) {
-      if (attempts > 50) return; // máx ~10 segundos
-      if (window.ObsidianSite?.graphView) {
-        callback(window.ObsidianSite.graphView);
-      } else {
-        setTimeout(() => waitForGraph(callback, attempts + 1), 200);
+    function waitForAllScripts(callback) {
+      const scripts = ["webpage", "graph-wasm", "graph-render-worker"];
+
+      function check() {
+        return scripts.every(id => {
+          const el = document.getElementById(id + "-script");
+          return el && el.getAttribute("loaded") === "true";
+        });
       }
+
+      function loop() {
+        if (check()) {
+          callback();
+        } else {
+          setTimeout(loop, 100);
+        }
+      }
+
+      loop();
     }
 
-    document.addEventListener('DOMContentLoaded', () => {
-      // Solo en la página principal (index)
-      const isIndex = window.location.pathname === '/' 
-                  || window.location.pathname.endsWith('index.html')
-                  || window.location.pathname === '';
+    document.addEventListener("DOMContentLoaded", () => {
+      const isIndex =
+        window.location.pathname === "/" ||
+        window.location.pathname.endsWith("index.html") ||
+        window.location.pathname === "";
 
       if (!isIndex) return;
 
-      waitForGraph(async (gv) => {
-        // 1. Mostrar el grafo GLOBAL (todas las notas)
-        await gv.showGraph();
+      waitForAllScripts(() => {
+        const waitForGraph = (attempts = 0) => {
+          if (attempts > 50) return;
 
-        // 2. Expandir a pantalla completa
-        if (!gv.graphExpanded) {
-          gv.toggleExpandedGraph();
-          document.body.classList.add('graph-fullscreen');
-        }
+          if (window.ObsidianSite?.graphView) {
+            const gv = window.ObsidianSite.graphView;
 
-        // 3. Ajustar zoom para que entren todos los nodos
-        setTimeout(() => gv.fitToNodes(), 400);
+            gv.showGraph();
+
+            setTimeout(() => {
+              if (!gv.graphExpanded) {
+                gv.toggleExpandedGraph();
+                document.body.classList.add("graph-fullscreen");
+              }
+
+              gv.fitToNodes();
+            }, 300);
+
+          } else {
+            setTimeout(() => waitForGraph(attempts + 1), 200);
+          }
+        };
+
+        waitForGraph();
       });
-
-      // Botón para salir del grafo
-      const closeBtn = document.createElement('button');
-      closeBtn.id = 'close-graph-btn';
-      closeBtn.textContent = '← Ver notas';
-      closeBtn.addEventListener('click', () => {
-        const gv = window.ObsidianSite?.graphView;
-        if (gv?.graphExpanded) {
-          gv.toggleExpandedGraph();
-          document.body.classList.remove('graph-fullscreen');
-        }
-      });
-      document.body.appendChild(closeBtn);
     });
   </script>
-    
 </head>
 
 <body>
@@ -129,13 +140,12 @@
       </div>
     </div>
    <div class="graph-view-container">
-      <canvas id="graph-canvas" class="hide"></canvas>
+      <canvas id="graph-canvas"></canvas>
     </div>
   </div>
 
   <div class="text"><p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p></div>
   <div class="text"><p>"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"</p></div>
-  <div class="text"><p>"At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat."</p></div>
   <div class="text"><p><i><u>IldlIGJ1eSB0aGluZ3Mgd2UgZG9u4oCZdCBuZWVkLCB3aXRoIG1vbmV5IHdlIGRvbuKAmXQgaGF2ZSwgdG8gaW1wcmVzcyBwZW9wbGUgd2UgZG9u4oCZdCBsaWtlLuKAnQrigJxZb3UgYXJlIG5vdCBzcGVjaWFsLiBZb3UgYXJlIG5vdCBhIGJlYXV0aWZ1bCBvciB1bmlxdWUgc25vd2ZsYWtlLiBZb3UgYXJlIHRoZSBzYW1lIGRlY2F5aW5nIG9yZ2FuaWMgbWF0dGVyIGFzIGV2ZXJ5dGhpbmcgZWxzZS4iCiJZb3UgYXJlIG5vdCB5b3VyIGpvYi4gWW914oCZcmUgbm90IGhvdyBtdWNoIG1vbmV5IHlvdSBoYXZlIGluIHRoZSBiYW5rLiBZb3XigJlyZSBub3QgdGhlIGNhciB5b3UgZHJpdmUuIFlvdeKAmXJlIG5vdCB0aGUgY29udGVudHMgb2YgeW91ciB3YWxsZXQuIFlvdeKAmXJlIG5vdCB5b3VyIGYqY2tpbmcga2hha2lzLiAKWW914oCZcmUgdGhlIGFsbC1zaW5naW5nLCBhbGwtZGFuY2luZyBjcmFwIG9mIHRoZSB3b3JsZC7igJ0KCg==</u></i></p></div>
 </body>
 
