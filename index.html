@@ -11,11 +11,93 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&display=swap" rel="stylesheet">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manufacturing+Consent&family=Orbitron:wght@400..900&family=Rubik+Glitch&family=UnifrakturMaguntia&display=swap" rel="stylesheet">
 
+  <style>
+    /* Cuando el grafo esté expandido, que ocupe toda la pantalla */
+    .graph-view-container.expanded {
+      position: fixed !important;
+      inset: 0 !important;          /* top/right/bottom/left = 0 */
+      width: 100vw !important;
+      height: 100vh !important;
+      z-index: 9999 !important;
+      border-radius: 0 !important;
+      background: var(--background-primary) !important;
+    }
+
+    /* Botón para cerrar el grafo y volver a las notas */
+    #close-graph-btn {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      z-index: 10000;
+      background: var(--interactive-accent);
+      color: var(--text-on-accent);
+      border: none;
+      border-radius: 6px;
+      padding: 6px 14px;
+      cursor: pointer;
+      font-size: 14px;
+      display: none;
+    }
+
+    .graph-view-container.expanded ~ #close-graph-btn,
+    body.graph-fullscreen #close-graph-btn {
+      display: block;
+    }
+  </style>
+
+  <script>
+    // Espera a que ObsidianSite y el grafo estén listos
+    function waitForGraph(callback, attempts = 0) {
+      if (attempts > 50) return; // máx ~10 segundos
+      if (window.ObsidianSite?.graphView) {
+        callback(window.ObsidianSite.graphView);
+      } else {
+        setTimeout(() => waitForGraph(callback, attempts + 1), 200);
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      // Solo en la página principal (index)
+      const isIndex = window.location.pathname === '/' 
+                  || window.location.pathname.endsWith('index.html')
+                  || window.location.pathname === '';
+
+      if (!isIndex) return;
+
+      waitForGraph(async (gv) => {
+        // 1. Mostrar el grafo GLOBAL (todas las notas)
+        await gv.showGraph();
+
+        // 2. Expandir a pantalla completa
+        if (!gv.graphExpanded) {
+          gv.toggleExpandedGraph();
+          document.body.classList.add('graph-fullscreen');
+        }
+
+        // 3. Ajustar zoom para que entren todos los nodos
+        setTimeout(() => gv.fitToNodes(), 400);
+      });
+
+      // Botón para salir del grafo
+      const closeBtn = document.createElement('button');
+      closeBtn.id = 'close-graph-btn';
+      closeBtn.textContent = '← Ver notas';
+      closeBtn.addEventListener('click', () => {
+        const gv = window.ObsidianSite?.graphView;
+        if (gv?.graphExpanded) {
+          gv.toggleExpandedGraph();
+          document.body.classList.remove('graph-fullscreen');
+        }
+      });
+      document.body.appendChild(closeBtn);
+    });
+  </script>
+    
 </head>
 
 <body>
