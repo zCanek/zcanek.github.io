@@ -3,6 +3,30 @@
     rel="stylesheet">
 
 <script>
+document.addEventListener("DOMContentLoaded", () => {
+  const isIndex = window.location.pathname === "/"
+               || window.location.pathname.endsWith("index.html")
+               || window.location.pathname.endsWith("Home.html");
+
+  if (!isIndex) return;
+
+  function tryExpand(attempts = 0) {
+    if (attempts > 30) return;
+    const gv = window.ObsidianSite?.graphView;
+    if (!gv) return setTimeout(() => tryExpand(attempts + 1), 300);
+
+    // Mostrar grafo global y expandirlo a pantalla completa
+    gv.showGraph().then(() => {
+      if (!gv.graphExpanded) gv.toggleExpandedGraph();
+      setTimeout(() => gv.fitToNodes(), 500);
+    });
+  }
+
+  tryExpand();
+});
+</script>
+
+<script>
     function insertBar() {
         const bar = document.createElement('div');
         bar.className = 'top-bar';
